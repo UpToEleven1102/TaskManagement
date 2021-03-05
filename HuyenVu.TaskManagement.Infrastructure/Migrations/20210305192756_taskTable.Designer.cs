@@ -4,14 +4,16 @@ using HuyenVu.TaskManagement.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace HuyenVu.TaskManagement.Infrastructure.Migrations
 {
     [DbContext(typeof(TaskManagementDbContext))]
-    partial class TaskManagementDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210305192756_taskTable")]
+    partial class taskTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -54,41 +56,6 @@ namespace HuyenVu.TaskManagement.Infrastructure.Migrations
                     b.ToTable("Tasks");
                 });
 
-            modelBuilder.Entity("HuyenVu.TaskManagement.Core.Entities.TaskHistory", b =>
-                {
-                    b.Property<int>("TaskId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime?>("Completed")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
-
-                    b.Property<DateTime?>("DueDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Remarks")
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
-
-                    b.Property<string>("Title")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<int?>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("TaskId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Task_History");
-                });
-
             modelBuilder.Entity("HuyenVu.TaskManagement.Core.Entities.User", b =>
                 {
                     b.Property<int>("Id")
@@ -119,15 +86,6 @@ namespace HuyenVu.TaskManagement.Infrastructure.Migrations
                 });
 
             modelBuilder.Entity("HuyenVu.TaskManagement.Core.Entities.Task", b =>
-                {
-                    b.HasOne("HuyenVu.TaskManagement.Core.Entities.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("HuyenVu.TaskManagement.Core.Entities.TaskHistory", b =>
                 {
                     b.HasOne("HuyenVu.TaskManagement.Core.Entities.User", "User")
                         .WithMany()
