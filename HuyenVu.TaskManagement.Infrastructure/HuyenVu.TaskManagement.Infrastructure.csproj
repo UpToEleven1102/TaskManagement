@@ -4,4 +4,8 @@
         <TargetFramework>net5.0</TargetFramework>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\HuyenVu.TaskManagement.Core\HuyenVu.TaskManagement.Core.csproj" />
+    </ItemGroup>
+
 </Project>
