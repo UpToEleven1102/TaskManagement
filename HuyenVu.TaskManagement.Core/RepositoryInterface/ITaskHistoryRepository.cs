@@ -2,7 +2,7 @@ using HuyenVu.TaskManagement.Core.Entities;
 
 namespace HuyenVu.TaskManagement.Core.RepositoryInterface
 {
-    public interface IUserRepository: IRepository<User>
+    public interface ITaskHistoryRepository: IRepository<TaskHistory>
     {
         
     }
