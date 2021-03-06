@@ -1,0 +1,8 @@
+a.navbar-brand {
+  font-weight: 800;
+  color: darkblue;
+}
+
+a.navbar-brand i {
+  color: darkblue;
+}

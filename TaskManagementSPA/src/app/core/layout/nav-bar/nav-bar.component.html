@@ -1,15 +1,17 @@
 <nav class="navbar navbar-light bg-light">
   <div class="container-fluid">
-    <button (click)="menuService.toggleMenu()">Menu</button>
-    <a class="navbar-brand" href="#">
-      <img
-        src="https://mir-s3-cdn-cf.behance.net/project_modules/disp/22a3ab16269821.562a8602153f7.png"
-        alt=""
-        width="30"
-        height="24"
-        class="d-inline-block align-top"
-      />
-      Task Manager
-    </a>
+    <div class="btn-group">
+      <button class="btn btn-light" (click)="menuService.toggleMenu()"><i class="bi bi-list"></i></button>
+      <a class="btn navbar-brand text-uppercase" [routerLink]="['/app']">
+        <i class="bi bi-clipboard-data d-inline-block align-top"></i>
+        Task Manger
+      </a>
+    </div>
+    <div class="btn-group">
+      <a class="btn btn-outline-dark">
+        <i class="bi bi-person"></i>
+        My Account
+      </a>
+    </div>
   </div>
 </nav>
