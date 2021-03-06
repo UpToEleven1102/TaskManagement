@@ -17,12 +17,12 @@ namespace HuyenVu.TaskManagement.Infrastructure.Repositories
             throw new System.NotImplementedException();
         }
 
-        public Task<bool> Delete(TaskHistory obj)
+        public Task<bool> Delete(TaskHistory taskHistory)
         {
             throw new System.NotImplementedException();
         }
 
-        public Task<IEnumerable<TaskHistory>> GetAll(TaskHistory obj)
+        public Task<IEnumerable<TaskHistory>> GetAll()
         {
             throw new System.NotImplementedException();
         }

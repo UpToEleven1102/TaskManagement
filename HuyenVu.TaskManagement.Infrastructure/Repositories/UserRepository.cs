@@ -1,35 +1,51 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using HuyenVu.TaskManagement.Core.Entities;
 using HuyenVu.TaskManagement.Core.RepositoryInterface;
+using HuyenVu.TaskManagement.Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace HuyenVu.TaskManagement.Infrastructure.Repositories
 {
-    public class UserRepository:IUserRepository
+    public class UserRepository : IUserRepository
     {
-        public Task<User> Create(User obj)
+        private readonly TaskManagementDbContext _dbContext;
+
+        public UserRepository(TaskManagementDbContext dbContext)
         {
-            throw new System.NotImplementedException();
+            _dbContext = dbContext;
         }
 
-        public Task<User> Update(User obj)
+        public async Task<User> Create(User user)
         {
-            throw new System.NotImplementedException();
+            await _dbContext.AddAsync(user);
+            await _dbContext.SaveChangesAsync();
+            return user;
         }
 
-        public Task<bool> Delete(User obj)
+        public async Task<User> Update(User user)
         {
-            throw new System.NotImplementedException();
+            _dbContext.Entry(user).State = EntityState.Modified;
+            await _dbContext.SaveChangesAsync();
+            return user;
         }
 
-        public Task<IEnumerable<User>> GetAll(User obj)
+        public async Task<bool> Delete(User user)
         {
-            throw new System.NotImplementedException();
+            _dbContext.Set<User>().Remove(user);
+            var res = await _dbContext.SaveChangesAsync();
+            return res > 0;
         }
 
-        public Task<User> GetById(int id)
+        public async Task<IEnumerable<User>> GetAll()
         {
-            throw new System.NotImplementedException();
+            return await _dbContext.Users.ToListAsync();
+        }
+
+        public async Task<User> GetById(int id)
+        {
+            return await _dbContext.Users.FindAsync(id);
         }
     }
 }

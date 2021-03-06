@@ -1,6 +1,8 @@
 using HuyenVu.TaskManagement.Core.RepositoryInterface;
+using HuyenVu.TaskManagement.Core.ServiceInterface;
 using HuyenVu.TaskManagement.Infrastructure.Data;
 using HuyenVu.TaskManagement.Infrastructure.Repositories;
+using HuyenVu.TaskManagement.Infrastructure.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -28,6 +30,9 @@ namespace HuyenVu.TaskManagement.API
             services.AddDbContext<TaskManagementDbContext>(opts =>
                 opts.UseSqlServer(Configuration.GetConnectionString("TaskManagementDbConnectionString")));
 
+            services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<IUserService, UserService>();
+            
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo {Title = "HuyenVu.TaskManagement.API", Version = "v1"});
