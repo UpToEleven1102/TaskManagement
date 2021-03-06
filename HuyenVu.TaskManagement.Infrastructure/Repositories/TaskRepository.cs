@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using HuyenVu.TaskManagement.Core.RepositoryInterface;
@@ -40,7 +39,7 @@ namespace HuyenVu.TaskManagement.Infrastructure.Repositories
 
         public async Task<IEnumerable<Task>> GetAll()
         {
-            return await _dbContext.Tasks.ToListAsync();
+            return await _dbContext.Tasks.Include(t => t.User).ToListAsync();
         }
 
         public async Task<Task> GetById(int id)

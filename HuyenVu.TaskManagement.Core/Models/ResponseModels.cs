@@ -8,8 +8,6 @@ namespace HuyenVu.TaskManagement.Core.Models
 
         public string Email { get; set; }
 
-        public string Password { get; set; }
-
         public string FullName { get; set; }
 
         public string MobileNo { get; set; }
@@ -29,7 +27,7 @@ namespace HuyenVu.TaskManagement.Core.Models
         
         public string Remarks { get; set; }
         
-        public UserResponseModel User { get; set; }
+        // public UserResponseModel User { get; set; }
     }
 
     public class TaskHistoryResponseModel
@@ -48,6 +46,6 @@ namespace HuyenVu.TaskManagement.Core.Models
         
         public string Remarks { get; set; }
         
-        public UserResponseModel User { get; set; }
+        // public UserResponseModel User { get; set; }
     }
 }
