@@ -2,35 +2,50 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using HuyenVu.TaskManagement.Core.RepositoryInterface;
+using HuyenVu.TaskManagement.Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
 using Task = HuyenVu.TaskManagement.Core.Entities.Task;
 
 namespace HuyenVu.TaskManagement.Infrastructure.Repositories
 {
     public class TaskRepository : ITaskRepository
     {
-        public System.Threading.Tasks.Task<Task> Create(Task obj)
+        private readonly TaskManagementDbContext _dbContext;
+
+        public TaskRepository(TaskManagementDbContext dbContext)
         {
-            throw new NotImplementedException();
+            _dbContext = dbContext;
         }
 
-        public System.Threading.Tasks.Task<Task> Update(Task obj)
+        public async System.Threading.Tasks.Task<Task> Create(Task task)
         {
-            throw new NotImplementedException();
+            await _dbContext.AddAsync(task);
+            await _dbContext.SaveChangesAsync();
+            return task;
         }
 
-        public Task<bool> Delete(Task task)
+        public async System.Threading.Tasks.Task<Task> Update(Task task)
         {
-            throw new NotImplementedException();
+            _dbContext.Entry(task).State = EntityState.Modified;
+            await _dbContext.SaveChangesAsync();
+            return task;
         }
 
-        public Task<IEnumerable<Task>> GetAll()
+        public async Task<bool> Delete(Task task)
         {
-            throw new NotImplementedException();
+            _dbContext.Set<Task>().Remove(task);
+            var res = await _dbContext.SaveChangesAsync();
+            return res > 0;
         }
 
-        public Task<Task> GetById(int id)
+        public async Task<IEnumerable<Task>> GetAll()
         {
-            throw new NotImplementedException();
+            return await _dbContext.Tasks.ToListAsync();
+        }
+
+        public async Task<Task> GetById(int id)
+        {
+            return await _dbContext.Tasks.FindAsync(id);
         }
     }
 }

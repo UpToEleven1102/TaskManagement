@@ -8,22 +8,22 @@ namespace HuyenVu.TaskManagement.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class UserController : ControllerBase
+    public class TaskHistoryController: ControllerBase
     {
-        private readonly IUserService _userService;
+        private readonly ITaskHistoryService _taskHistoryService;
 
-        public UserController(IUserService userService)
+        public TaskHistoryController(ITaskHistoryService taskHistoryService)
         {
-            _userService = userService;
+            _taskHistoryService = taskHistoryService;
         }
 
         [HttpGet]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> GetAll()
         {
             try
             {
-                var users = await _userService.GetAllUsers();
-                return Ok(users);
+                var tasks = await _taskHistoryService.GetTasks();
+                return Ok(tasks);
             }
             catch (Exception e)
             {
@@ -33,19 +33,13 @@ namespace HuyenVu.TaskManagement.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateUser(UserRequestModel userModel)
+        public async Task<IActionResult> CreateTask(TaskHistoryRequestModel taskRequestModel)
         {
             try
             {
-                if (!ModelState.IsValid)
-                {
-                    return BadRequest(ModelState.Values);
-                }
-                
-                var user = await _userService.AddUser(userModel);
-                return user == null
-                    ? StatusCode(500, "Something went wrong!")
-                    : StatusCode(201, user);
+                if (!ModelState.IsValid) return BadRequest(ModelState.Values);
+                var res = await _taskHistoryService.AddTask(taskRequestModel);
+                return Ok(res);
             }
             catch (Exception e)
             {
@@ -55,16 +49,13 @@ namespace HuyenVu.TaskManagement.API.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> UpdateUser(UserRequestModel userModel)
+        public async Task<IActionResult> UpdateTask(TaskHistoryRequestModel taskRequestModel)
         {
             try
             {
-                if (!ModelState.IsValid)
-                {
-                    return BadRequest(ModelState.Values);
-                }
-                
-                var res = await _userService.UpdateUser(userModel);
+                if (!ModelState.IsValid) return BadRequest(ModelState.Values);
+
+                var res = await _taskHistoryService.UpdateTask(taskRequestModel);
                 return Ok(res);
             }
             catch (Exception e)
@@ -76,12 +67,12 @@ namespace HuyenVu.TaskManagement.API.Controllers
 
         [HttpGet]
         [Route("{id}")]
-        public async Task<IActionResult> GetUserById(int id)
+        public async Task<IActionResult> GetTask(int id)
         {
             try
             {
-                var user = await _userService.GetUserById(id);
-                return user == null ? NotFound() : Ok(user);
+                var task = await _taskHistoryService.GetTaskById(id);
+                return task == null ? NotFound() : Ok(task);
             }
             catch (Exception e)
             {
@@ -92,12 +83,12 @@ namespace HuyenVu.TaskManagement.API.Controllers
 
         [HttpDelete]
         [Route("{id}")]
-        public async Task<IActionResult> DeleteUser(int id)
+        public async Task<IActionResult> DeleteTask(int id)
         {
             try
             {
-                var res = await _userService.DeleteUser(id);
-                return res ? Ok() : BadRequest();
+                var task = await _taskHistoryService.DeleteTask(id);
+                return task ? Ok() : BadRequest();
             }
             catch (Exception e)
             {

@@ -2,34 +2,49 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using HuyenVu.TaskManagement.Core.Entities;
 using HuyenVu.TaskManagement.Core.RepositoryInterface;
+using HuyenVu.TaskManagement.Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace HuyenVu.TaskManagement.Infrastructure.Repositories
 {
     public class TaskHistoryRepository: ITaskHistoryRepository
     {
-        public Task<TaskHistory> Create(TaskHistory obj)
+        private readonly TaskManagementDbContext _dbContext;
+
+        public TaskHistoryRepository(TaskManagementDbContext dbContext)
         {
-            throw new System.NotImplementedException();
+            _dbContext = dbContext;
         }
 
-        public Task<TaskHistory> Update(TaskHistory obj)
+        public async Task<TaskHistory> Create(TaskHistory obj)
         {
-            throw new System.NotImplementedException();
+            await _dbContext.AddAsync(obj);
+            await _dbContext.SaveChangesAsync();
+            return obj;
         }
 
-        public Task<bool> Delete(TaskHistory taskHistory)
+        public async Task<TaskHistory> Update(TaskHistory taskHistory)
         {
-            throw new System.NotImplementedException();
+            _dbContext.Entry(taskHistory).State = EntityState.Modified;
+            await _dbContext.SaveChangesAsync();
+            return taskHistory;
         }
 
-        public Task<IEnumerable<TaskHistory>> GetAll()
+        public async Task<bool> Delete(TaskHistory taskHistory)
         {
-            throw new System.NotImplementedException();
+            _dbContext.Set<TaskHistory>().Remove(taskHistory);
+            var res = await _dbContext.SaveChangesAsync();
+            return res > 0;
         }
 
-        public Task<TaskHistory> GetById(int id)
+        public async Task<IEnumerable<TaskHistory>> GetAll()
         {
-            throw new System.NotImplementedException();
+            return await _dbContext.TaskHistories.ToListAsync();
+        }
+
+        public async Task<TaskHistory> GetById(int id)
+        {
+            return await _dbContext.TaskHistories.FindAsync(id);
         }
     }
 }
