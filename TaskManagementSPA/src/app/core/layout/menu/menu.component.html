@@ -1,0 +1,18 @@
+<div #collapse="ngbCollapse" [(ngbCollapse)]="menuService.isCollapsed">
+  <nav class ="navbar bg-dark">
+    <ul class ="nav navbar-nav">
+      <li class ="nav-item">
+        <a class ="nav-link" [routerLink]="['/app']"> Dashboard </a>
+      </li>
+      <li class ="nav-item">
+        <a class ="nav-link" [routerLink]="['/app/users']"> Users </a>
+      </li>
+      <li class ="nav-item">
+        <a class ="nav-link" [routerLink]="['/app/tasks']"> Tasks </a>
+      </li>
+      <li class ="nav-item">
+        <a class ="nav-link" [routerLink]="['/app/task-histories']"> Task Histories </a>
+      </li>
+    </ul>
+  </nav>
+</div>
