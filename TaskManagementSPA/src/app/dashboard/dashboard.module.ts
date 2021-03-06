@@ -7,10 +7,12 @@ import { TaskHistoriesComponent } from './task-histories/task-histories.componen
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
 import { CoreModule } from '../core/core.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [HomeComponent, UsersComponent, TasksComponent, TaskHistoriesComponent, DashboardComponent],
   exports: [DashboardComponent],
-  imports: [CommonModule, DashboardRoutingModule, CoreModule],
+  imports: [CommonModule, DashboardRoutingModule, CoreModule, NgbModule, FormsModule],
 })
 export class DashboardModule {}

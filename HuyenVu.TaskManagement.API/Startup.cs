@@ -32,13 +32,13 @@ namespace HuyenVu.TaskManagement.API
 
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IUserService, UserService>();
-            
+
             services.AddTransient<ITaskHistoryRepository, TaskHistoryRepository>();
             services.AddTransient<ITaskHistoryService, TaskHistoryService>();
-            
+
             services.AddTransient<ITaskRepository, TaskRepository>();
             services.AddTransient<ITaskService, TaskService>();
-            
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo {Title = "HuyenVu.TaskManagement.API", Version = "v1"});
@@ -54,6 +54,8 @@ namespace HuyenVu.TaskManagement.API
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "HuyenVu.TaskManagement.API v1"));
             }
+
+            app.UseCors(builder => builder.WithOrigins("http://localhost:4200").AllowCredentials().AllowAnyMethod());
 
             app.UseHttpsRedirection();
 

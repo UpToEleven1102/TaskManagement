@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
-import {HomeComponent} from './home/home.component';
-import {UsersComponent} from './users/users.component';
-import {TasksComponent} from './tasks/tasks.component';
-import {TaskHistoriesComponent} from './task-histories/task-histories.component';
+import { RouterModule, Routes } from '@angular/router';
+import { HomeComponent } from './home/home.component';
+import { UsersComponent } from './users/users.component';
+import { TasksComponent } from './tasks/tasks.component';
+import { TaskHistoriesComponent } from './task-histories/task-histories.component';
 
 const routes: Routes = [
   { path: 'app', component: HomeComponent },
@@ -16,4 +16,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class DashboardRoutingModule { }
+export class DashboardRoutingModule {}

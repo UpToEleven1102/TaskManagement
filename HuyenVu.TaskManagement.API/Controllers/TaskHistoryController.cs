@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace HuyenVu.TaskManagement.API.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("api/task-history")]
     public class TaskHistoryController: ControllerBase
     {
         private readonly ITaskHistoryService _taskHistoryService;
