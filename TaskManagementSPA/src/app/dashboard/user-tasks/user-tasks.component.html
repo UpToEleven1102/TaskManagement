@@ -1,0 +1,21 @@
+<div class="container-fluid">
+  <br />
+  <div class="row">
+    <div class="col">
+      <app-back-button [path]="'/app/users'"></app-back-button>
+      <h5>Tasks</h5>
+    </div>
+  </div>
+  <br />
+  <app-tasks-list
+    *ngIf="users && user; else loadingContainer"
+    [tasks]="user.tasks || []"
+    [users]="users"
+    [user]="user"
+    (onArchiveSuccess)="archiveSuccess($event)"
+    (onEditSuccess)="editSuccess($event)"
+  ></app-tasks-list>
+</div>
+<ng-template #loadingContainer>
+  <app-loading></app-loading>
+</ng-template>

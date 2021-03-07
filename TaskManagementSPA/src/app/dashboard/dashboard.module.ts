@@ -13,6 +13,7 @@ import { SharedModule } from '../shared/shared.module';
 import { UserDetailComponent } from './user-detail/user-detail.component';
 import { NewUserModalComponent } from './user-detail/new-user-modal/new-user-modal.component';
 import { NewTaskModalComponent } from './tasks/new-task-modal/new-task-modal.component';
+import { UserTasksComponent } from './user-tasks/user-tasks.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { NewTaskModalComponent } from './tasks/new-task-modal/new-task-modal.com
     UserDetailComponent,
     NewUserModalComponent,
     NewTaskModalComponent,
+    UserTasksComponent,
   ],
   exports: [DashboardComponent],
   imports: [CommonModule, DashboardRoutingModule, CoreModule, NgbModule, FormsModule, SharedModule],

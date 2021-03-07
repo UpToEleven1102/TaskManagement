@@ -13,6 +13,8 @@ import { Subject } from 'rxjs';
 })
 export class TasksListComponent implements OnDestroy {
   @Input() tasks!: Task[];
+  // lazy to populate users into tasks
+  @Input() user?: User;
   @Input() users!: User[];
   @Output() onEditSuccess: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() onArchiveSuccess: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -27,7 +29,7 @@ export class TasksListComponent implements OnDestroy {
   }
 
   openEditTask(task: Task): void {
-    task.userId = task.user?.id;
+    task.userId = task.user?.id || this.user?.id;
     const modalRef = this.modalService.open(NewTaskModalComponent);
     modalRef.result.then((res) => {
       if (res) {

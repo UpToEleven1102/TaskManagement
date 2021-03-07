@@ -30,7 +30,7 @@
           <td>{{ user.email }}</td>
           <td>{{ user.mobileNo | phone }}</td>
           <td>
-            <a class="btn page-link">{{ user.tasks?.length || 0 }}</a>
+            <a class="btn page-link" [routerLink]="[user.id + '/tasks']">{{ user.tasks?.length || 0 }}</a>
           </td>
           <td>
             <a class="btn page-link" (click)="viewTaskHistories(user)">{{ user.taskHistories?.length || 0 }}</a>

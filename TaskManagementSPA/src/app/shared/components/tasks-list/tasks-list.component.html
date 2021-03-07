@@ -1,5 +1,5 @@
-  <table class="table table-striped" *ngIf="tasks.length > 0; else noContent">
-    <thead>
+<table class="table table-striped" *ngIf="tasks.length > 0; else noContent">
+  <thead>
     <tr>
       <th scope="col">#</th>
       <th scope="col">Title</th>
@@ -7,11 +7,11 @@
       <th scope="col">Remarks</th>
       <th scope="col">Due Date</th>
       <th scope="col">Priority</th>
-      <th scope="col">User</th>
+      <th scope="col" *ngIf="tasks[0].user">User</th>
       <th>Actions</th>
     </tr>
-    </thead>
-    <tbody>
+  </thead>
+  <tbody>
     <tr *ngFor="let task of tasks; index as i">
       <th scope="row">{{ task?.id || i }}</th>
       <td>
@@ -29,7 +29,7 @@
       <td>
         <ngb-highlight [result]="task.priority"></ngb-highlight>
       </td>
-      <td>
+      <td *ngIf="task?.user">
         <ngb-highlight [result]="task.user?.fullName + ' - ' + task.user?.email"></ngb-highlight>
       </td>
       <td>
@@ -41,19 +41,19 @@
         </button>
       </td>
     </tr>
-    </tbody>
-  </table>
+  </tbody>
+</table>
 
-  <ng-template #noContent>
-    <p class="text-center">No Tasks</p>
-  </ng-template>
-  <!--<div class="d-flex justify-content-between p-2">-->
-  <!--  <ngb-pagination [collectionSize]="page.pageCount!" [(page)]="page.currentPage" [pageSize]="page.pageSize">-->
-  <!--  </ngb-pagination>-->
+<ng-template #noContent>
+  <p class="text-center">No Tasks</p>
+</ng-template>
+<!--<div class="d-flex justify-content-between p-2">-->
+<!--  <ngb-pagination [collectionSize]="page.pageCount!" [(page)]="page.currentPage" [pageSize]="page.pageSize">-->
+<!--  </ngb-pagination>-->
 
-  <!--  <select class="custom-select" style="width: auto" name="pageSize" [(ngModel)]="page.pageSize">-->
-  <!--    <option [ngValue]="2">2 items per page</option>-->
-  <!--    <option [ngValue]="4">4 items per page</option>-->
-  <!--    <option [ngValue]="6">6 items per page</option>-->
-  <!--  </select>-->
-  <!--</div>-->
+<!--  <select class="custom-select" style="width: auto" name="pageSize" [(ngModel)]="page.pageSize">-->
+<!--    <option [ngValue]="2">2 items per page</option>-->
+<!--    <option [ngValue]="4">4 items per page</option>-->
+<!--    <option [ngValue]="6">6 items per page</option>-->
+<!--  </select>-->
+<!--</div>-->
