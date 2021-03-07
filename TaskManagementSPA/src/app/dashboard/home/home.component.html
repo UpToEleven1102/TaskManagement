@@ -7,7 +7,7 @@
 
   <div class="row">
     <div class="col">
-      <div class="card">
+      <div class="card btn" [routerLink]="['users']">
         <div class="card-body">
           <h5 class="card-title text-center">Users</h5>
           <p class="card-text text-center"><i class="bi bi-people-fill"></i> {{ dashboard?.userCount }}</p>
@@ -15,7 +15,7 @@
       </div>
     </div>
     <div class="col">
-      <div class="card">
+      <div class="card btn" [routerLink]="['tasks']">
         <div class="card-body">
           <h5 class="card-title text-center">Active Tasks</h5>
           <p class="card-text text-center"><i class="bi bi-list-task"></i> {{ dashboard?.taskCount }}</p>
@@ -23,7 +23,7 @@
       </div>
     </div>
     <div class="col">
-      <div class="card">
+      <div class="card btn" [routerLink]="['task-histories']">
         <div class="card-body">
           <h5 class="card-title text-center">Completed</h5>
           <p class="card-text text-center"><i class="bi bi-file-check"></i> {{ dashboard?.taskHistoryCount }}</p>

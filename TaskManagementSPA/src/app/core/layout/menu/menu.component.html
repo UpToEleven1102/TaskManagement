@@ -16,12 +16,12 @@
         <i class="bi bi-people"></i> <span [(ngbCollapse)]="menuService.isCollapsed"> Users </span></a
       >
     </li>
-    <!--    <li class="nav-item">-->
-    <!--      <a class="nav-link btn-light" [routerLink]="['/app/tasks']">-->
-    <!--        <i class="bi bi-list-task"></i>-->
-    <!--        <span [(ngbCollapse)]="menuService.isCollapsed"> Tasks </span>-->
-    <!--      </a>-->
-    <!--    </li>-->
+    <li class="nav-item">
+      <a class="nav-link btn-light" [routerLink]="['/app/tasks']">
+        <i class="bi bi-list-task"></i>
+        <span [(ngbCollapse)]="menuService.isCollapsed"> Tasks </span>
+      </a>
+    </li>
     <li class="nav-item">
       <a class="nav-link btn-light" routerLinkActive="active" [routerLink]="['/app/task-histories']">
         <i class="bi bi-clock-history"></i>
