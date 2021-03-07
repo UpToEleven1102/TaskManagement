@@ -2,6 +2,8 @@ nav {
   position: fixed;
   z-index: 100;
   width: 100%;
+  height: 68px;
+  transition: height 0.2s ease-in-out;
 }
 
 a.navbar-brand {
@@ -11,4 +13,27 @@ a.navbar-brand {
 
 a.navbar-brand i {
   color: darkblue;
+}
+
+nav.mini {
+  height: 40px;
+  padding: 0px 8px;
+}
+
+nav.mini .btn-account {
+  padding: 3px;
+  height: 30px;
+  width: 30px;
+}
+
+.text-uppercase {
+  transition: font-size 0.2s ease-in-out;
+}
+
+nav.mini .text-uppercase {
+  font-size: 1rem;
+}
+
+nav.mini .btn-account span {
+  display: none;
 }

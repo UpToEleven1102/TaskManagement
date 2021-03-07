@@ -1,4 +1,4 @@
-<nav class="navbar navbar-light bg-light">
+<nav class="navbar navbar-light bg-light {{(innerTop > 5 || isMobile) && 'mini'}}">
   <div class="container-fluid">
     <div class="btn-group">
       <button class="nav-link btn btn-light" (click)="menuService.toggleMenu()"><i class="bi bi-list"></i></button>
@@ -7,10 +7,12 @@
         Task Manger
       </a>
     </div>
-    <div class="btn-group" *ngIf="!isMobile">
-      <a class="btn btn-outline-dark">
+    <div class="btn-group">
+      <a class="btn btn-outline-dark btn-account">
         <i class="bi bi-person"></i>
-        My Account
+        <span>
+          My Account
+        </span>
       </a>
     </div>
   </div>
