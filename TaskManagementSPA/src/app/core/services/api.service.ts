@@ -53,6 +53,10 @@ export class ApiService {
     return this.getData('task').pipe(map((res) => res as Task[]));
   }
 
+  getTaskById(id: string): Observable<Task> {
+    return this.getData('task/' + id).pipe(map((res) => res as Task));
+  }
+
   getUsers(): Observable<User[]> {
     return this.getData('user').pipe(map((res) => res as User[]));
   }
@@ -71,6 +75,14 @@ export class ApiService {
 
   putUser(user: UserRequest): Observable<any> {
     return this.putData('user', user);
+  }
+
+  postTask(task: Task): Observable<any> {
+    return this.postData('task', task);
+  }
+
+  putTask(task: Task): Observable<any> {
+    return this.putData('task', task);
   }
 
   completeTask(id: number): Observable<any> {

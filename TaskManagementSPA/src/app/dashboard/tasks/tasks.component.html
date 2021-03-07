@@ -2,7 +2,7 @@
   <br />
   <div class="row">
     <div class="col">
-      <button class="btn btn-outline-dark float-right">New Task</button>
+      <button class="btn btn-outline-dark float-right" (click)="openNewTaskModal()">New Task</button>
     </div>
   </div>
   <br />
@@ -20,8 +20,8 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let task of tasks">
-        <th scope="row">{{ task.id }}</th>
+      <tr *ngFor="let task of tasks; index as i">
+        <th scope="row">{{ task?.id || i }}</th>
         <td>
           <ngb-highlight [result]="task.title"></ngb-highlight>
         </td>
@@ -38,11 +38,11 @@
           <ngb-highlight [result]="task.priority"></ngb-highlight>
         </td>
         <td>
-          <ngb-highlight [result]="task.user.fullName + ' - ' + task.user.email"></ngb-highlight>
+          <ngb-highlight [result]="task.user?.fullName + ' - ' + task.user?.email"></ngb-highlight>
         </td>
         <td>
           <button class="btn btn-outline-dark"><i class="bi bi-person-check"></i> Assign</button>
-          <button class="btn btn-outline-dark" (click)="completeTask(task.id)">
+          <button class="btn btn-outline-dark" (click)="completeTask(task?.id || i)">
             <i class="bi bi-check-circle"></i> Archive
           </button>
         </td>

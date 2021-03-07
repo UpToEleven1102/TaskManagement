@@ -10,13 +10,14 @@ export type TaskHistory = {
 };
 
 export type Task = {
-  id: number;
+  id?: number;
   title: string;
   description: string;
   dueDate: string;
-  priority: string;
+  priority: '0' | '1' | '2' | '3' | '4' | '5';
   remarks: string;
-  user: User;
+  userId?: number;
+  user?: User;
 };
 
 

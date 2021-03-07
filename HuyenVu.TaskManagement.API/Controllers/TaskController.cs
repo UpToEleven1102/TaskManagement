@@ -38,8 +38,8 @@ namespace HuyenVu.TaskManagement.API.Controllers
             try
             {
                 if (!ModelState.IsValid) return BadRequest(ModelState.Values);
-                var res = await _taskService.AddTask(taskRequestModel);
-                return Ok(res);
+                await _taskService.AddTask(taskRequestModel);
+                return Ok();
             }
             catch (Exception e)
             {
@@ -55,8 +55,8 @@ namespace HuyenVu.TaskManagement.API.Controllers
             {
                 if (!ModelState.IsValid) return BadRequest(ModelState.Values);
 
-                var res = await _taskService.UpdateTask(taskRequestModel);
-                return Ok(res);
+                await _taskService.UpdateTask(taskRequestModel);
+                return Ok();
             }
             catch (Exception e)
             {

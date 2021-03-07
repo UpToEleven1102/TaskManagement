@@ -4,6 +4,8 @@ import { Task } from '../../shared/types';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { ToastService } from '../../core/services/toast.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NewTaskModalComponent } from './new-task-modal/new-task-modal.component';
 
 @Component({
   selector: 'app-tasks',
@@ -14,7 +16,7 @@ export class TasksComponent implements OnInit, OnDestroy {
   tasks?: Task[];
   subscription = new Subject();
 
-  constructor(private api: ApiService, private toast: ToastService) {}
+  constructor(private api: ApiService, private toast: ToastService, private modalService: NgbModal) {}
 
   private fetchData(): void {
     this.subscription.next();
@@ -25,7 +27,6 @@ export class TasksComponent implements OnInit, OnDestroy {
       .subscribe(
         (res) => {
           this.tasks = res;
-          console.log(res);
         },
         () => {
           this.toast.show('Error!', 'Something went wrong!');
@@ -52,11 +53,20 @@ export class TasksComponent implements OnInit, OnDestroy {
         (res) => {
           this.fetchData();
           this.toast.show('Success!', 'Archived the task!');
-
         },
         () => {
           this.toast.show('Error!', 'Something went wrong!');
         }
       );
+  }
+
+  openNewTaskModal(): void {
+    const modalRef = this.modalService.open(NewTaskModalComponent);
+    modalRef.result.then((res) => {
+      console.log(res);
+      if (res) {
+        this.fetchData();
+      }
+    });
   }
 }
