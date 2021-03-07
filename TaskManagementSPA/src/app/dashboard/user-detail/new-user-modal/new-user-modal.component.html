@@ -5,5 +5,9 @@
   </button>
 </div>
 <div class="modal-body">
-  <app-user-detail [noBackButton]="noBackButton" [close]="activeModal.dismiss"></app-user-detail>
+  <app-user-detail
+    [noBackButton]="noBackButton"
+    [close]="activeModal.dismiss"
+    (onSuccess)="(onSuccess($event))"
+  ></app-user-detail>
 </div>

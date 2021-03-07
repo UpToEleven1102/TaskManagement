@@ -55,7 +55,7 @@ namespace HuyenVu.TaskManagement.API.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> UpdateUser(UserRequestModel userModel)
+        public async Task<IActionResult> UpdateUser(UserUpdateRequestModel userModel)
         {
             try
             {
@@ -64,8 +64,8 @@ namespace HuyenVu.TaskManagement.API.Controllers
                     return BadRequest(ModelState.Values);
                 }
                 
-                var res = await _userService.UpdateUser(userModel);
-                return Ok(res);
+                await _userService.UpdateUser(userModel);
+                return Ok();
             }
             catch (Exception e)
             {

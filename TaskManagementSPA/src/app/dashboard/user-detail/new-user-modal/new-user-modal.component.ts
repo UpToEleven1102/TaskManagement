@@ -14,4 +14,9 @@ export class NewUserModalComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  onSuccess(success: boolean): void {
+    if (success) {
+      this.activeModal.close(success);
+    }
+  }
 }

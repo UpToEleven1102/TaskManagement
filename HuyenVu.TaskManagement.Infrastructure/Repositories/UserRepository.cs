@@ -61,13 +61,13 @@ namespace HuyenVu.TaskManagement.Infrastructure.Repositories
         public async Task<IEnumerable<User>> GetMostCompletedUser()
         {
             return await _dbContext.Users.OrderByDescending(u => u.TaskHistories.Count()).Include(u => u.TaskHistories)
-                .Take(10).ToListAsync();
+                .Take(8).ToListAsync();
         }
 
         public async Task<IEnumerable<User>> GetMostTaskUser()
         {
             return await _dbContext.Users.OrderByDescending(u => u.Tasks.Count()).Include(u => u.Tasks)
-                .Take(10).ToListAsync();
+                .Take(8).ToListAsync();
         }
     }
 }

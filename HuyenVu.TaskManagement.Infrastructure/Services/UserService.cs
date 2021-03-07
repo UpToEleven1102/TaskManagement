@@ -42,10 +42,14 @@ namespace HuyenVu.TaskManagement.Infrastructure.Services
             return _userRepository.Create(user);
         }
 
-        public Task<User> UpdateUser(UserRequestModel userRequestModel)
+        public async Task<User> UpdateUser(UserUpdateRequestModel userRequestModel)
         {
-            var user = _requestMapper.Map<User>(userRequestModel);
-            return _userRepository.Update(user);
+            var user = await _userRepository.GetById(userRequestModel.Id);
+            user.Email = userRequestModel.Email;
+            user.FullName = userRequestModel.FullName;
+            user.MobileNo = userRequestModel.MobileNo;
+            if (userRequestModel.Password != null) user.Password = userRequestModel.Password;
+            return await _userRepository.Update(user);
         }
 
         public async Task<IEnumerable<UserResponseModel>> GetAllUsers()
