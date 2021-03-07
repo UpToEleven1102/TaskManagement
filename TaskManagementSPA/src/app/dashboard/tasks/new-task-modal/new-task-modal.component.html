@@ -1,14 +1,14 @@
 <div class="modal-header">
   <h4 class="modal-title">Add Task</h4>
-  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss()">
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
 <div class="modal-body">
-  <form (ngSubmit)="postTask()">
+  <form (ngSubmit)="postTask()" *ngIf="users; else loadingContainer">
     <div class="mb-3">
       <label for="title" class="form-label">Title</label>
-      <input id="title" [disabled]="loading" name="title" class="form-control" [(ngModel)]="task.title"/>
+      <input id="title" [disabled]="loading" name="title" class="form-control" [(ngModel)]="task.title" />
     </div>
     <div class="mb-3">
       <label for="description" class="form-label">Description</label>
@@ -41,12 +41,14 @@
       <label for="userId" class="form-label">Assign To:</label>
       <select class="form-select" id="userId" [disabled]="loading" name="userId" [(ngModel)]="task.userId">
         <option value="" selected>...</option>
-        <option value="{{user.id}}" *ngFor="let user of users">{{user.fullName}} - {{user.email}}</option>
+        <option value="{{ user.id }}" *ngFor="let user of users">{{ user.fullName }} - {{ user.email }}</option>
       </select>
     </div>
 
     <div class="mb-3">
-      <label for="dueDate" class="form-label">Due Date</label>
+      <label for="dueDate" class="form-label"
+        >Due Date: {{ this.dueDateModel.month }}/{{ this.dueDateModel.day }}/{{ this.dueDateModel.year }}</label
+      >
       <br />
       <ngb-datepicker
         id="dueDate"
@@ -62,4 +64,7 @@
       <app-loading></app-loading>
     </ng-template>
   </form>
+  <ng-template #loadingContainer>
+    <app-loading></app-loading>
+  </ng-template>
 </div>

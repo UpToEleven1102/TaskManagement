@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ApiService } from '../../core/services/api.service';
-import { Task } from '../../shared/types';
+import { Task, User } from '../../shared/types';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { ToastService } from '../../core/services/toast.service';
@@ -14,6 +14,7 @@ import { NewTaskModalComponent } from './new-task-modal/new-task-modal.component
 })
 export class TasksComponent implements OnInit, OnDestroy {
   tasks?: Task[];
+  users?: User[];
   subscription = new Subject();
 
   constructor(private api: ApiService, private toast: ToastService, private modalService: NgbModal) {}
@@ -36,6 +37,10 @@ export class TasksComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.fetchData();
+    this.api
+      .getUsers()
+      .pipe(takeUntil(this.subscription))
+      .subscribe((res) => (this.users = res));
   }
 
   ngOnDestroy(): void {
@@ -63,10 +68,22 @@ export class TasksComponent implements OnInit, OnDestroy {
   openNewTaskModal(): void {
     const modalRef = this.modalService.open(NewTaskModalComponent);
     modalRef.result.then((res) => {
-      console.log(res);
       if (res) {
         this.fetchData();
       }
     });
+    modalRef.componentInstance.users = this.users;
+  }
+
+  openEditTask(task: Task): void {
+    task.userId = task.user?.id;
+    const modalRef = this.modalService.open(NewTaskModalComponent);
+    modalRef.result.then((res) => {
+      if (res) {
+        this.fetchData();
+      }
+    });
+    modalRef.componentInstance.task = { ...task };
+    modalRef.componentInstance.users = this.users;
   }
 }

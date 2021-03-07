@@ -1,6 +1,6 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import { NgbActiveModal, NgbCalendar, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
-import {Task, User} from '../../../shared/types';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { NgbActiveModal, NgbCalendar, NgbDate, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
+import { Task, User } from '../../../shared/types';
 import { ApiService } from '../../../core/services/api.service';
 import { ToastService } from '../../../core/services/toast.service';
 import { Subject } from 'rxjs';
@@ -13,7 +13,7 @@ import { takeUntil } from 'rxjs/operators';
 })
 export class NewTaskModalComponent implements OnInit, OnDestroy {
   @Input() task!: Task;
-  users?: User[];
+  @Input() users!: User[];
   loading = false;
   dueDateModel!: NgbDateStruct;
   subscription = new Subject();
@@ -26,13 +26,17 @@ export class NewTaskModalComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.api.getUsers().pipe(takeUntil(this.subscription)).subscribe(res => this.users = res);
     if (!this.task) {
       this.task = { description: '', dueDate: '', priority: '3', remarks: '', title: '' };
     } else {
       delete this.task.user;
     }
-    this.dueDateModel = this.calendar.getToday();
+    if (this.task?.dueDate) {
+      const dueDate = new Date(this.task.dueDate);
+      this.dueDateModel = new NgbDate(dueDate.getFullYear(), dueDate.getMonth() + 1, dueDate.getDate());
+    } else {
+      this.dueDateModel = this.calendar.getToday();
+    }
   }
 
   ngOnDestroy(): void {
@@ -49,13 +53,16 @@ export class NewTaskModalComponent implements OnInit, OnDestroy {
       return this.toast.show('Error!', 'Task should be assigned to an user!');
     }
 
-    this.task.dueDate = new Date(this.dueDateModel.year, this.dueDateModel.month, this.dueDateModel.day).toISOString();
+    this.task.dueDate = new Date(this.dueDateModel.year, this.dueDateModel.month - 1, this.dueDateModel.day).toISOString();
     (this.task.id ? this.api.putTask(this.task) : this.api.postTask(this.task))
       .pipe(takeUntil(this.subscription))
-      .subscribe((res) => {
-        this.activeModal.close(true);
-      }, () => {
-        this.toast.show('Error!', 'Something went wrong!');
-      });
+      .subscribe(
+        (res) => {
+          this.activeModal.close(true);
+        },
+        () => {
+          this.toast.show('Error!', 'Something went wrong!');
+        }
+      );
   }
 }
