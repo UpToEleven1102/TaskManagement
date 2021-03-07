@@ -1,24 +1,29 @@
 <nav class="navbar bg-light min-vh-100 align-items-start">
   <ul class="nav navbar-nav">
     <li class="nav-item">
-      <a class="nav-link btn-light" [routerLink]="['/app']">
+      <a
+        class="nav-link btn-light"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        [routerLink]="['/app']"
+      >
         <i class="bi bi-speedometer"></i>
         <span [(ngbCollapse)]="menuService.isCollapsed"> Dashboard </span>
       </a>
     </li>
     <li class="nav-item">
-      <a class="nav-link btn-light" [routerLink]="['/app/users']">
+      <a class="nav-link btn-light" routerLinkActive="active" [routerLink]="['/app/users']">
         <i class="bi bi-people"></i> <span [(ngbCollapse)]="menuService.isCollapsed"> Users </span></a
       >
     </li>
+    <!--    <li class="nav-item">-->
+    <!--      <a class="nav-link btn-light" [routerLink]="['/app/tasks']">-->
+    <!--        <i class="bi bi-list-task"></i>-->
+    <!--        <span [(ngbCollapse)]="menuService.isCollapsed"> Tasks </span>-->
+    <!--      </a>-->
+    <!--    </li>-->
     <li class="nav-item">
-      <a class="nav-link btn-light" [routerLink]="['/app/tasks']">
-        <i class="bi bi-list-task"></i>
-        <span [(ngbCollapse)]="menuService.isCollapsed"> Tasks </span>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link btn-light" [routerLink]="['/app/task-histories']">
+      <a class="nav-link btn-light" routerLinkActive="active" [routerLink]="['/app/task-histories']">
         <i class="bi bi-clock-history"></i>
         <span [(ngbCollapse)]="menuService.isCollapsed"> Task Histories </span>
       </a>
