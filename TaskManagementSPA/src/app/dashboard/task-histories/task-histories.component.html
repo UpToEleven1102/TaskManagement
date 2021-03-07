@@ -1,31 +1,5 @@
 <div class="container-fluid" *ngIf="taskHistories; else loadingContainer">
-  <table class="table table-striped">
-    <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Title</th>
-      <th scope="col">Description</th>
-      <th scope="col">Remarks</th>
-      <th scope="col">Due Date</th>
-      <th scope="col">Completed</th>
-      <th scope="col">User</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let task of taskHistories">
-      <th scope="row">{{ task.taskId }}</th>
-      <td>
-        <ngb-highlight [result]="task.title"></ngb-highlight>
-      </td>
-      <td><ngb-highlight [result]="task.description"></ngb-highlight></td>
-      <td><ngb-highlight [result]="task.remarks"></ngb-highlight></td>
-      <td><ngb-highlight [result]="task.dueDate | date: 'MM/dd/yyyy'"></ngb-highlight></td>
-      <td><ngb-highlight [result]="task.completed | date: 'MM/dd/yyyy'"></ngb-highlight></td>
-      <td><ngb-highlight [result]="task.user.fullName + ' - ' + task.user.email"></ngb-highlight></td>
-    </tr>
-    </tbody>
-  </table>
-
+  <app-task-histories-list [taskHistories]="taskHistories"></app-task-histories-list>
   <!--<div class="d-flex justify-content-between p-2">-->
   <!--  <ngb-pagination [collectionSize]="page.pageCount!" [(page)]="page.currentPage" [pageSize]="page.pageSize">-->
   <!--  </ngb-pagination>-->

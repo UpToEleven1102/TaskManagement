@@ -2,7 +2,9 @@
   <br />
   <div class="row">
     <div class="col">
-      <button class="btn btn-outline-dark float-right" (click)="openNewUserModal()"><i class="bi bi-person-plus"></i> New User</button>
+      <button class="btn btn-outline-dark float-right" (click)="openNewUserModal()">
+        <i class="bi bi-person-plus"></i> New User
+      </button>
     </div>
   </div>
   <br />
@@ -19,21 +21,28 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let user of users; index as i">
-        <th scope="row">{{ i + 1 }}</th>
-        <td>
-          {{ user.fullName }}
-        </td>
-        <td>{{ user.email }}</td>
-        <td>{{ user.mobileNo | phone }}</td>
-        <td>
-          <a class="btn page-link">{{ user.tasks?.length || 0 }}</a>
-        </td>
-        <td>
-          <a class="btn page-link">{{ user.taskHistories?.length || 0 }}</a>
-        </td>
-        <td><button class="btn btn-outline-dark w-100" [routerLink]="['/app/users', user.id]">Edit</button></td>
-      </tr>
+      <ng-container *ngFor="let user of users; index as i">
+        <tr>
+          <th scope="row">{{ i + 1 }}</th>
+          <td>
+            {{ user.fullName }}
+          </td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.mobileNo | phone }}</td>
+          <td>
+            <a class="btn page-link">{{ user.tasks?.length || 0 }}</a>
+          </td>
+          <td>
+            <a class="btn page-link" (click)="viewTaskHistories(user)">{{ user.taskHistories?.length || 0 }}</a>
+          </td>
+          <td><button class="btn btn-outline-dark w-100" [routerLink]="['/app/users', user.id]">Edit</button></td>
+        </tr>
+        <tr *ngIf="showUserId === user.id">
+          <td colspan="6">
+            <app-task-histories-list [taskHistories]="user.taskHistories || []"></app-task-histories-list>
+          </td>
+        </tr>
+      </ng-container>
     </tbody>
   </table>
   <ng-template #noContent>

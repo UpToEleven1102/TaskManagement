@@ -13,6 +13,7 @@ import { NewUserModalComponent } from '../user-detail/new-user-modal/new-user-mo
 })
 export class UsersComponent implements OnInit, OnDestroy {
   subscription = new Subject();
+  showUserId?: number;
   users?: User[];
 
   constructor(protected api: ApiService, private modalService: NgbModal) {}
@@ -34,6 +35,10 @@ export class UsersComponent implements OnInit, OnDestroy {
       }
     });
     modalRef.componentInstance.noBackButton = true;
+  }
+
+  viewTaskHistories(user: User): void {
+    this.showUserId = this.showUserId === user.id ? undefined : user.id;
   }
 
   private fetchData(): void {

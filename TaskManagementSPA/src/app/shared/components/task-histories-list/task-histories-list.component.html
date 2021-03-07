@@ -1,0 +1,26 @@
+<table class="table table-striped" *ngIf="taskHistories">
+  <thead>
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col">Title</th>
+    <th scope="col">Description</th>
+    <th scope="col">Remarks</th>
+    <th scope="col">Due Date</th>
+    <th scope="col">Completed</th>
+    <th scope="col" *ngIf="taskHistories[0].user">User</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let task of taskHistories">
+    <th scope="row">{{ task.taskId }}</th>
+    <td>
+      <ngb-highlight [result]="task.title"></ngb-highlight>
+    </td>
+    <td><ngb-highlight [result]="task.description"></ngb-highlight></td>
+    <td><ngb-highlight [result]="task.remarks"></ngb-highlight></td>
+    <td><ngb-highlight [result]="task.dueDate | date: 'MM/dd/yyyy'"></ngb-highlight></td>
+    <td><ngb-highlight [result]="task.completed | date: 'MM/dd/yyyy'"></ngb-highlight></td>
+    <td *ngIf="task.user"><ngb-highlight [result]="task.user?.fullName + ' - ' + task.user?.email"></ngb-highlight></td>
+  </tr>
+  </tbody>
+</table>

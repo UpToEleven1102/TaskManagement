@@ -9,7 +9,7 @@ import { DashboardComponent } from './dashboard.component';
 import { CoreModule } from '../core/core.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
-import {SharedModule} from '../shared/shared.module';
+import { SharedModule } from '../shared/shared.module';
 import { UserDetailComponent } from './user-detail/user-detail.component';
 import { NewUserModalComponent } from './user-detail/new-user-modal/new-user-modal.component';
 import { NewTaskModalComponent } from './tasks/new-task-modal/new-task-modal.component';
