@@ -1,10 +1,10 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
-import {ApiService} from '../../core/services/api.service';
-import {Subject} from 'rxjs';
-import {takeUntil} from 'rxjs/operators';
-import {User} from '../../shared/types';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {NewUserModalComponent} from '../user-detail/new-user-modal/new-user-modal.component';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { ApiService } from '../../core/services/api.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { User } from '../../shared/types';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NewUserModalComponent } from '../user-detail/new-user-modal/new-user-modal.component';
 
 @Component({
   selector: 'app-users',
@@ -15,8 +15,7 @@ export class UsersComponent implements OnInit, OnDestroy {
   subscription = new Subject();
   users?: User[];
 
-  constructor(protected api: ApiService, private modalService: NgbModal) {
-  }
+  constructor(protected api: ApiService, private modalService: NgbModal) {}
 
   ngOnInit(): void {
     this.fetchData();

@@ -1,1 +1,64 @@
-<p>tasks works!</p>
+<div class="container-fluid" *ngIf="tasks; else loadingContainer">
+  <br />
+  <div class="row">
+    <div class="col">
+      <button class="btn btn-outline-dark float-right">New Task</button>
+    </div>
+  </div>
+  <br />
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Title</th>
+        <th scope="col">Description</th>
+        <th scope="col">Remarks</th>
+        <th scope="col">Due Date</th>
+        <th scope="col">Priority</th>
+        <th scope="col">User</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let task of tasks">
+        <th scope="row">{{ task.id }}</th>
+        <td>
+          <ngb-highlight [result]="task.title"></ngb-highlight>
+        </td>
+        <td>
+          <ngb-highlight [result]="task.description"></ngb-highlight>
+        </td>
+        <td>
+          <ngb-highlight [result]="task.remarks"></ngb-highlight>
+        </td>
+        <td>
+          <ngb-highlight [result]="task.dueDate | date: 'MM/dd/yyyy'"></ngb-highlight>
+        </td>
+        <td>
+          <ngb-highlight [result]="task.priority"></ngb-highlight>
+        </td>
+        <td>
+          <ngb-highlight [result]="task.user.fullName + ' - ' + task.user.email"></ngb-highlight>
+        </td>
+        <td>
+          <button class="btn btn-outline-dark"><i class="bi bi-person-check"></i> Assign</button>
+          <button class="btn btn-outline-dark"><i class="bi bi-check-circle"></i> Complete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!--<div class="d-flex justify-content-between p-2">-->
+  <!--  <ngb-pagination [collectionSize]="page.pageCount!" [(page)]="page.currentPage" [pageSize]="page.pageSize">-->
+  <!--  </ngb-pagination>-->
+
+  <!--  <select class="custom-select" style="width: auto" name="pageSize" [(ngModel)]="page.pageSize">-->
+  <!--    <option [ngValue]="2">2 items per page</option>-->
+  <!--    <option [ngValue]="4">4 items per page</option>-->
+  <!--    <option [ngValue]="6">6 items per page</option>-->
+  <!--  </select>-->
+  <!--</div>-->
+</div>
+<ng-template #loadingContainer>
+  <app-loading></app-loading>
+</ng-template>

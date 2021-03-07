@@ -1,5 +1,3 @@
-import {Task} from 'protractor/built/taskScheduler';
-
 export type TaskHistory = {
   taskId: number;
   userId: number;
@@ -10,6 +8,17 @@ export type TaskHistory = {
   remarks: string;
   user: User;
 };
+
+export type Task = {
+  id: number;
+  title: string;
+  description: string;
+  dueDate: string;
+  priority: string;
+  remarks: string;
+  user: User;
+};
+
 
 export type User = {
   id: number;

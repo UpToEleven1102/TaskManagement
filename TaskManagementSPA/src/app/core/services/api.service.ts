@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParamsOptions } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { Observable, ObservableInput, throwError } from 'rxjs';
-import { Dashboard, TaskHistory, User, UserRequest } from '../../shared/types';
+import { Dashboard, Task, TaskHistory, User, UserRequest } from '../../shared/types';
 import { catchError, map } from 'rxjs/operators';
 import { ToastService } from './toast.service';
 
@@ -47,6 +47,10 @@ export class ApiService {
 
   getTaskHistories(): Observable<TaskHistory[]> {
     return this.getData('task-history').pipe(map((res) => res as TaskHistory[]));
+  }
+
+  getTasks(): Observable<Task[]> {
+    return this.getData('task').pipe(map((res) => res as Task[]));
   }
 
   getUsers(): Observable<User[]> {
