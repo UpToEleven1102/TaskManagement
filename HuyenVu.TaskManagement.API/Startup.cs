@@ -58,7 +58,7 @@ namespace HuyenVu.TaskManagement.API
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "HuyenVu.TaskManagement.API v1"));
             }
 
-            app.UseCors(builder => builder.WithOrigins("http://localhost:4200").AllowCredentials().AllowAnyMethod());
+            app.UseCors(builder => builder.WithOrigins("http://localhost:4200").AllowCredentials().AllowAnyHeader().AllowAnyMethod());
 
             app.UseHttpsRedirection();
 

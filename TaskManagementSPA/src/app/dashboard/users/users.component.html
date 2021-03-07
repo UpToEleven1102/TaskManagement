@@ -1,1 +1,45 @@
-<p>users works!</p>
+<div class="container-fluid" *ngIf="users; else loadingContainer">
+  <br />
+  <div class="row">
+    <div class="col">
+      <button class="btn btn-outline-dark float-right" (click)="openNewUserModal()"><i class="bi bi-person-plus"></i> New User</button>
+    </div>
+  </div>
+  <br />
+  <table class="table table-striped" *ngIf="users.length > 0; else noContent">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Mobile No</th>
+        <th scope="col"># of Tasks</th>
+        <th scope="col">Completed</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users; index as i">
+        <th scope="row">{{ i + 1 }}</th>
+        <td>
+          {{ user.fullName }}
+        </td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.mobileNo | phone }}</td>
+        <td>
+          <a class="btn page-link">{{ user.tasks?.length || 0 }}</a>
+        </td>
+        <td>
+          <a class="btn page-link">{{ user.taskHistories?.length || 0 }}</a>
+        </td>
+        <td><button class="btn btn-outline-dark w-100" [routerLink]="['/app/users', user.id]">Edit</button></td>
+      </tr>
+    </tbody>
+  </table>
+  <ng-template #noContent>
+    <h5 class="text-center">No Users</h5>
+  </ng-template>
+</div>
+<ng-template #loadingContainer>
+  <app-loading></app-loading>
+</ng-template>

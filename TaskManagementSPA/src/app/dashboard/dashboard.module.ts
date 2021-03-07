@@ -10,9 +10,19 @@ import { CoreModule } from '../core/core.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import {SharedModule} from '../shared/shared.module';
+import { UserDetailComponent } from './user-detail/user-detail.component';
+import { NewUserModalComponent } from './user-detail/new-user-modal/new-user-modal.component';
 
 @NgModule({
-  declarations: [HomeComponent, UsersComponent, TasksComponent, TaskHistoriesComponent, DashboardComponent],
+  declarations: [
+    HomeComponent,
+    UsersComponent,
+    TasksComponent,
+    TaskHistoriesComponent,
+    DashboardComponent,
+    UserDetailComponent,
+    NewUserModalComponent,
+  ],
   exports: [DashboardComponent],
   imports: [CommonModule, DashboardRoutingModule, CoreModule, NgbModule, FormsModule, SharedModule],
 })

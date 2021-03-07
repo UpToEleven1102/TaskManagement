@@ -57,7 +57,7 @@ namespace HuyenVu.TaskManagement.Infrastructure.Services
             {
                 UserCount = await _userRepository.Count(),
                 TaskCount = await _taskRepository.Count(),
-                TaskHistoryCount = await _taskRepository.Count(),
+                TaskHistoryCount = await _taskHistoryRepository.Count(),
                 TopTaskUsers = _mapper.Map<IEnumerable<UserResponseModel>>(topTaskUsers),
                 TopCompletedUsers = _mapper.Map<IEnumerable<UserResponseModel>>(topCompletedUsers),
                 RecentTaskHistories = _taskMapper.Map<IEnumerable<TaskHistoryResponseModel>>(recentTaskHistory)

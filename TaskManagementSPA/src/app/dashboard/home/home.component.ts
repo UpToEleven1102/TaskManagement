@@ -20,7 +20,6 @@ export class HomeComponent implements OnInit, OnDestroy {
       .getDashboard()
       .pipe(takeUntil(this.subscription))
       .subscribe((res) => {
-        console.table(res.topTaskUsers);
         this.dashboard = res;
       });
   }

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParamsOptions } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { Observable, ObservableInput, throwError } from 'rxjs';
-import { Dashboard, TaskHistory, User } from '../../shared/types';
+import { Dashboard, TaskHistory, User, UserRequest } from '../../shared/types';
 import { catchError, map } from 'rxjs/operators';
 import { ToastService } from './toast.service';
 
@@ -17,15 +17,29 @@ export class ApiService {
     this.headers.append('Content-Type', 'application/json');
   }
 
-  getData(path: string): Observable<object> {
+  private getData(path: string): Observable<object> {
     return this.http.get(`${environment.apiUrl}${path}`).pipe(
       map((res) => res),
       catchError(this.handleError)
     );
   }
 
-  postData(path: string, payload: object, options?: HttpParamsOptions): Observable<object> {
+  private postData(path: string, payload: object, options?: HttpParamsOptions): Observable<object> {
     return this.http.post(`${environment.apiUrl}${path}`, payload, { headers: this.headers, ...options }).pipe(
+      map((res) => res),
+      catchError(this.handleError)
+    );
+  }
+
+  private putData(path: string, payload: object, options?: HttpParamsOptions): Observable<object> {
+    return this.http.put(`${environment.apiUrl}${path}`, payload, { headers: this.headers, ...options }).pipe(
+      map((res) => res),
+      catchError(this.handleError)
+    );
+  }
+
+  private deleteData(path: string, options?: HttpParamsOptions): Observable<object> {
+    return this.http.delete(`${environment.apiUrl}${path}`, { headers: this.headers, ...options }).pipe(
       map((res) => res),
       catchError(this.handleError)
     );
@@ -39,8 +53,20 @@ export class ApiService {
     return this.getData('user').pipe(map((res) => res as User[]));
   }
 
+  getUserById(id: string): Observable<User> {
+    return this.getData('user/' + id).pipe(map((res) => res as User));
+  }
+
   getDashboard(): Observable<Dashboard> {
     return this.getData('dashboard').pipe(map((res) => res as Dashboard));
+  }
+
+  postUser(user: UserRequest): Observable<any> {
+    return this.postData('user', user);
+  }
+
+  putUser(user: UserRequest): Observable<any> {
+    return this.putData('user', user);
   }
 
   private handleError = (error: HttpErrorResponse): ObservableInput<any> => {

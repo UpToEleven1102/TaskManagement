@@ -16,8 +16,16 @@ export type User = {
   email: string;
   fullName: string;
   mobileNo: string;
-  tasks: Task[];
-  taskHistories: TaskHistory[];
+  tasks?: Task[];
+  taskHistories?: TaskHistory[];
+};
+
+export type UserRequest = {
+  id?: number;
+  email: string;
+  fullName: string;
+  mobileNo: string;
+  password?: string; // for post purpose only
 };
 
 export type PaginationType<T> = {
