@@ -8,7 +8,7 @@ import { TaskHistoriesListComponent } from './components/task-histories-list/tas
 
 @NgModule({
   declarations: [ToastComponent, LoadingComponent, TasksListComponent, TaskHistoriesListComponent],
-  exports: [ToastComponent, LoadingComponent, TaskHistoriesListComponent],
+  exports: [ToastComponent, LoadingComponent, TaskHistoriesListComponent, TasksListComponent],
   imports: [CommonModule, NgbToastModule, NgbTypeaheadModule],
 })
 export class SharedModule {}

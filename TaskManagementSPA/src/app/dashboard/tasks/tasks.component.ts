@@ -48,23 +48,6 @@ export class TasksComponent implements OnInit, OnDestroy {
     this.subscription.complete();
   }
 
-  completeTask(id: number): void {
-    this.subscription.next();
-    this.subscription.complete();
-    this.api
-      .completeTask(id)
-      .pipe(takeUntil(this.subscription))
-      .subscribe(
-        (res) => {
-          this.fetchData();
-          this.toast.show('Success!', 'Archived the task!');
-        },
-        () => {
-          this.toast.show('Error!', 'Something went wrong!');
-        }
-      );
-  }
-
   openNewTaskModal(): void {
     const modalRef = this.modalService.open(NewTaskModalComponent);
     modalRef.result.then((res) => {
@@ -75,15 +58,18 @@ export class TasksComponent implements OnInit, OnDestroy {
     modalRef.componentInstance.users = this.users;
   }
 
-  openEditTask(task: Task): void {
-    task.userId = task.user?.id;
-    const modalRef = this.modalService.open(NewTaskModalComponent);
-    modalRef.result.then((res) => {
-      if (res) {
-        this.fetchData();
-      }
-    });
-    modalRef.componentInstance.task = { ...task };
-    modalRef.componentInstance.users = this.users;
+  archiveSuccess(success: boolean): void {
+    if (success) {
+      this.fetchData();
+      this.toast.show('Success!', 'Archived the task!');
+    } else {
+      this.toast.show('Error!', 'Something went wrong!');
+    }
+  }
+
+  editSuccess(success: boolean): void {
+    if (success) {
+      this.fetchData();
+    }
   }
 }
