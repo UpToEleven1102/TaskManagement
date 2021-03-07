@@ -17,7 +17,7 @@
     <div class="col">
       <div class="card btn" [routerLink]="['tasks']">
         <div class="card-body">
-          <h5 class="card-title text-center">Active Tasks</h5>
+          <h5 class="card-title text-center">Tasks</h5>
           <p class="card-text text-center"><i class="bi bi-list-task"></i> {{ dashboard?.taskCount }}</p>
         </div>
       </div>
@@ -42,74 +42,80 @@
           <div class="row">
             <div class="col">
               <h6>Tasks In Progress</h6>
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Email</th>
-                    <th scope="col"># of Tasks</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let user of dashboard?.topTaskUsers; index as i">
-                    <th scope="row">{{ i + 1 }}</th>
-                    <td>{{ user.fullName }}</td>
-                    <td>{{ user.email }}</td>
-                    <td>{{ user.tasks?.length || 0 }}</td>
-                  </tr>
-                </tbody>
-              </table>
+              <div class="table-responsive">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Name</th>
+                      <th scope="col">Email</th>
+                      <th scope="col"># of Tasks</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let user of dashboard?.topTaskUsers; index as i">
+                      <th scope="row">{{ i + 1 }}</th>
+                      <td>{{ user.fullName }}</td>
+                      <td>{{ user.email }}</td>
+                      <td>{{ user.tasks?.length || 0 }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
             <div class="col">
               <h6>Task Completed</h6>
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Email</th>
-                    <th scope="col"># of Tasks</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let user of dashboard?.topCompletedUsers; index as i">
-                    <th scope="row">{{ i + 1 }}</th>
-                    <td>{{ user.fullName }}</td>
-                    <td>{{ user.email }}</td>
-                    <td>{{ user.taskHistories?.length || 0 }}</td>
-                  </tr>
-                </tbody>
-              </table>
+              <div class="table-responsive">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Name</th>
+                      <th scope="col">Email</th>
+                      <th scope="col"># of Tasks</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let user of dashboard?.topCompletedUsers; index as i">
+                      <th scope="row">{{ i + 1 }}</th>
+                      <td>{{ user.fullName }}</td>
+                      <td>{{ user.email }}</td>
+                      <td>{{ user.taskHistories?.length || 0 }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="col-5">
+    <div class="col">
       <div class="card h-100">
         <div class="card-body">
           <h5 class="card-title text-center">Recently Completed Tasks <i class="bi bi-list-task"></i></h5>
-          <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">Title</th>
-                <th scope="col">Description</th>
-                <th scope="col">Completed</th>
-                <th scope="col">User</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let task of dashboard?.recentTaskHistories; index as i">
-                <th scope="row">{{ i + 1 }}</th>
-                <td>{{ task.title }}</td>
-                <td>{{ task.description }}</td>
-                <td>{{ task.completed | date: 'MM/dd/YYYY' }}</td>
-                <td>{{ task.user?.fullName + ' - ' + task.user?.email }}</td>
-              </tr>
-            </tbody>
-          </table>
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Title</th>
+                  <th scope="col">Description</th>
+                  <th scope="col">Completed</th>
+                  <th scope="col">User</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let task of dashboard?.recentTaskHistories; index as i">
+                  <th scope="row">{{ i + 1 }}</th>
+                  <td>{{ task.title }}</td>
+                  <td>{{ task.description }}</td>
+                  <td>{{ task.completed | date: 'MM/dd/YYYY' }}</td>
+                  <td>{{ task.user?.fullName + ' - ' + task.user?.email }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>

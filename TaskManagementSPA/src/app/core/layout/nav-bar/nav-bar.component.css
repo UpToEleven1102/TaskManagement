@@ -1,3 +1,9 @@
+nav {
+  position: fixed;
+  z-index: 100;
+  width: 100%;
+}
+
 a.navbar-brand {
   font-weight: 800;
   color: darkblue;

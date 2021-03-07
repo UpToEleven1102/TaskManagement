@@ -1,15 +1,24 @@
-<div class="container-fluid" *ngIf="taskHistories; else loadingContainer">
-  <app-task-histories-list [taskHistories]="taskHistories"></app-task-histories-list>
-  <!--<div class="d-flex justify-content-between p-2">-->
-  <!--  <ngb-pagination [collectionSize]="page.pageCount!" [(page)]="page.currentPage" [pageSize]="page.pageSize">-->
-  <!--  </ngb-pagination>-->
+<div class="row">
+  <div class="col">
+    <h3 class="float-left">
+      Tasks
+    </h3>
+  </div>
+</div>
+<div class="row" *ngIf="taskHistories; else loadingContainer">
+  <div class="col">
+    <app-task-histories-list [taskHistories]="taskHistories"></app-task-histories-list>
+    <!--<div class="d-flex justify-content-between p-2">-->
+    <!--  <ngb-pagination [collectionSize]="page.pageCount!" [(page)]="page.currentPage" [pageSize]="page.pageSize">-->
+    <!--  </ngb-pagination>-->
 
-  <!--  <select class="custom-select" style="width: auto" name="pageSize" [(ngModel)]="page.pageSize">-->
-  <!--    <option [ngValue]="2">2 items per page</option>-->
-  <!--    <option [ngValue]="4">4 items per page</option>-->
-  <!--    <option [ngValue]="6">6 items per page</option>-->
-  <!--  </select>-->
-  <!--</div>-->
+    <!--  <select class="custom-select" style="width: auto" name="pageSize" [(ngModel)]="page.pageSize">-->
+    <!--    <option [ngValue]="2">2 items per page</option>-->
+    <!--    <option [ngValue]="4">4 items per page</option>-->
+    <!--    <option [ngValue]="6">6 items per page</option>-->
+    <!--  </select>-->
+    <!--</div>-->
+  </div>
 </div>
 <ng-template #loadingContainer>
   <app-loading></app-loading>

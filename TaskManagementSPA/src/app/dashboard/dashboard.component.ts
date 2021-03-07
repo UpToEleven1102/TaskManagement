@@ -6,10 +6,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-
+  isMobile = false;
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  sizeChange(width: number): void {
+    console.log(width)
+    if (width < 790) {
+      this.isMobile = true;
+    }
+  }
 }

@@ -7,10 +7,11 @@ import { TasksListComponent } from './components/tasks-list/tasks-list.component
 import { TaskHistoriesListComponent } from './components/task-histories-list/task-histories-list.component';
 import { BackButtonComponent } from './components/back-button/back-button.component';
 import { RouterModule } from '@angular/router';
+import { SizeDetectorComponent } from './components/size-detector/size-detector.component';
 
 @NgModule({
-  declarations: [ToastComponent, LoadingComponent, TasksListComponent, TaskHistoriesListComponent, BackButtonComponent],
-  exports: [ToastComponent, LoadingComponent, TaskHistoriesListComponent, TasksListComponent, BackButtonComponent],
+  declarations: [ToastComponent, LoadingComponent, TasksListComponent, TaskHistoriesListComponent, BackButtonComponent, SizeDetectorComponent],
+  exports: [ToastComponent, LoadingComponent, TaskHistoriesListComponent, TasksListComponent, BackButtonComponent, SizeDetectorComponent],
   imports: [CommonModule, NgbToastModule, NgbTypeaheadModule, RouterModule],
 })
 export class SharedModule {}

@@ -1,4 +1,4 @@
-<nav class="navbar bg-light min-vh-100 align-items-start">
+<nav class="navbar bg-light min-vh-100 align-items-start" style="{{isMobile && 'width: min-content;'}}">
   <ul class="nav navbar-nav">
     <li class="nav-item">
       <a
@@ -8,24 +8,24 @@
         [routerLink]="['/app']"
       >
         <i class="bi bi-speedometer"></i>
-        <span [(ngbCollapse)]="menuService.isCollapsed"> Dashboard </span>
+        <span [(ngbCollapse)]="menuService.isCollapsed || isMobile"> Dashboard </span>
       </a>
     </li>
     <li class="nav-item">
       <a class="nav-link btn-light" routerLinkActive="active" [routerLink]="['/app/users']">
-        <i class="bi bi-people"></i> <span [(ngbCollapse)]="menuService.isCollapsed"> Users </span></a
+        <i class="bi bi-people"></i> <span [(ngbCollapse)]="menuService.isCollapsed || isMobile"> Users </span></a
       >
     </li>
     <li class="nav-item">
       <a class="nav-link btn-light" [routerLink]="['/app/tasks']">
         <i class="bi bi-list-task"></i>
-        <span [(ngbCollapse)]="menuService.isCollapsed"> Tasks </span>
+        <span [(ngbCollapse)]="menuService.isCollapsed || isMobile"> Tasks </span>
       </a>
     </li>
     <li class="nav-item">
       <a class="nav-link btn-light" routerLinkActive="active" [routerLink]="['/app/task-histories']">
         <i class="bi bi-clock-history"></i>
-        <span [(ngbCollapse)]="menuService.isCollapsed"> Task Histories </span>
+        <span [(ngbCollapse)]="menuService.isCollapsed || isMobile"> Task Histories </span>
       </a>
     </li>
   </ul>

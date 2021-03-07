@@ -1,5 +1,6 @@
-<table class="table table-striped" *ngIf="taskHistories">
-  <thead>
+<div class="table-responsive">
+  <table class="table table-striped" *ngIf="taskHistories">
+    <thead>
     <tr>
       <th scope="col">#</th>
       <th scope="col">Title</th>
@@ -9,8 +10,8 @@
       <th scope="col">Completed</th>
       <th scope="col" *ngIf="taskHistories[0]?.user">User</th>
     </tr>
-  </thead>
-  <tbody>
+    </thead>
+    <tbody>
     <tr *ngFor="let task of taskHistories">
       <th scope="row">{{ task.taskId }}</th>
       <td>
@@ -24,5 +25,7 @@
         <ngb-highlight [result]="task.user?.fullName + ' - ' + task.user?.email"></ngb-highlight>
       </td>
     </tr>
-  </tbody>
-</table>
+    </tbody>
+  </table>
+</div>
+

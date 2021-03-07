@@ -1,3 +1,23 @@
 .section-title {
   padding: 15px 0;
 }
+
+@media (max-width: 576px) {
+  h3 {
+    font-size: 1.5rem;
+  }
+
+  h5 {
+    font-size: 1rem;
+  }
+
+  .card-body.btn {
+  }
+
+  td {
+    font-size: .8rem;
+    overflow-wrap: break-word;
+    overflow: hidden;
+    max-width: 40px;
+  }
+}

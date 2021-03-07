@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {MenuService} from '../../services/menu.service';
 
 @Component({
@@ -7,7 +7,7 @@ import {MenuService} from '../../services/menu.service';
   styleUrls: ['./nav-bar.component.css']
 })
 export class NavBarComponent implements OnInit {
-
+  @Input() isMobile = false;
   constructor(public menuService: MenuService) { }
 
   ngOnInit(): void {

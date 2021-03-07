@@ -1,9 +1,13 @@
-<div class="container-fluid">
-  <app-nav-bar></app-nav-bar>
-  <div class="row">
-    <app-menu></app-menu>
-    <div class="col">
-      <router-outlet></router-outlet>
+<app-nav-bar [isMobile]="isMobile" ></app-nav-bar>
+<div class="row">
+  <app-menu [isMobile]="isMobile" *ngIf="!isMobile; else mobileMenu"></app-menu>
+  <ng-template #mobileMenu>
+    <div class="col-1">
+      <app-menu [isMobile]="isMobile"></app-menu>
     </div>
+  </ng-template>
+  <div class="col-11 col-md">
+    <router-outlet></router-outlet>
   </div>
 </div>
+<app-size-detector (onSizeChange)="sizeChange($event)"></app-size-detector>
