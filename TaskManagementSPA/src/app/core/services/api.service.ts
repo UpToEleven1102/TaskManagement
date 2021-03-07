@@ -24,7 +24,7 @@ export class ApiService {
     );
   }
 
-  private postData(path: string, payload: object, options?: HttpParamsOptions): Observable<object> {
+  private postData(path: string, payload?: object, options?: HttpParamsOptions): Observable<object> {
     return this.http.post(`${environment.apiUrl}${path}`, payload, { headers: this.headers, ...options }).pipe(
       map((res) => res),
       catchError(this.handleError)
@@ -71,6 +71,10 @@ export class ApiService {
 
   putUser(user: UserRequest): Observable<any> {
     return this.putData('user', user);
+  }
+
+  completeTask(id: number): Observable<any> {
+    return this.postData(`task/${id}/complete`).pipe(map((res) => res));
   }
 
   private handleError = (error: HttpErrorResponse): ObservableInput<any> => {

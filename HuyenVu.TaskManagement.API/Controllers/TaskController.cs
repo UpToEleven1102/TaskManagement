@@ -96,5 +96,21 @@ namespace HuyenVu.TaskManagement.API.Controllers
                 return StatusCode(500, e.Message);
             }
         }
+
+        [HttpPost]
+        [Route("{id}/complete")]
+        public async Task<IActionResult> CompleteTask(int id)
+        {
+            try
+            {
+                await _taskService.CompleteTask(id);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return StatusCode(500, e.Message);
+            }
+        }
     }
 }

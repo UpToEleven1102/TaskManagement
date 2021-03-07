@@ -16,5 +16,7 @@ namespace HuyenVu.TaskManagement.Core.ServiceInterface
         public Task<TaskResponseModel> GetTaskById(int id);
         
         public Task<bool> DeleteTask(int id);
+
+        public Task<bool> CompleteTask(int id);
     }
 }

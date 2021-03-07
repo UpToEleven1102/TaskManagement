@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -15,10 +16,12 @@ namespace HuyenVu.TaskManagement.Infrastructure.Services
         private readonly IMapper _requestMapper;
         private readonly IMapper _responseMapper;
         private readonly ITaskRepository _taskRepository;
+        private readonly ITaskHistoryRepository _taskHistoryRepository;
 
-        public TaskService(ITaskRepository taskRepository)
+        public TaskService(ITaskRepository taskRepository, ITaskHistoryRepository taskHistoryRepository)
         {
             _taskRepository = taskRepository;
+            _taskHistoryRepository = taskHistoryRepository;
             _requestMapper = MapperFactory.GetMapper<TaskRequestModel, Task>();
             _responseMapper = MapperFactory.GetMapper(new MapperConfiguration(cfg =>
             {
@@ -57,6 +60,24 @@ namespace HuyenVu.TaskManagement.Infrastructure.Services
             var task = await _taskRepository.GetById(id);
             if (task == null) return false;
             return await _taskRepository.Delete(task);
+        }
+
+        public async System.Threading.Tasks.Task<bool> CompleteTask(int id)
+        {
+            var task = await _taskRepository.GetById(id);
+            if (task == null) return false;
+            
+            var taskHistory = new TaskHistory()
+            {
+                UserId   = task.UserId,
+                Title = task.Title,
+                Description = task.Description,
+                DueDate = task.DueDate,
+                Remarks = task.Remarks,
+                Completed = DateTime.Now,
+            };
+            await _taskHistoryRepository.Create(taskHistory);
+            return await DeleteTask(id);
         }
     }
 }

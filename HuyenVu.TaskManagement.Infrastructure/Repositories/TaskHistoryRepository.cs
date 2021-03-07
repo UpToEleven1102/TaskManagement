@@ -43,8 +43,10 @@ namespace HuyenVu.TaskManagement.Infrastructure.Repositories
         public async Task<IEnumerable<TaskHistory>> GetAll(Expression<Func<TaskHistory, bool>> filter = null)
         {
             return filter == null
-                ? await _dbContext.TaskHistories.Include(th => th.User).ToListAsync()
-                : await _dbContext.TaskHistories.Where(filter).Include(th => th.User).ToListAsync();
+                ? await _dbContext.TaskHistories.OrderByDescending(t => t.Completed).Include(th => th.User)
+                    .ToListAsync()
+                : await _dbContext.TaskHistories.OrderByDescending(t => t.Completed).Where(filter)
+                    .Include(th => th.User).ToListAsync();
         }
 
         public async Task<TaskHistory> GetById(int id)
