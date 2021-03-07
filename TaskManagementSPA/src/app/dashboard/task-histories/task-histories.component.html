@@ -1,5 +1,6 @@
-<table class="table table-striped">
-  <thead>
+<div class="container" *ngIf="taskHistories; else loadingContainer">
+  <table class="table table-striped">
+    <thead>
     <tr>
       <th scope="col">#</th>
       <th scope="col">Title</th>
@@ -9,8 +10,8 @@
       <th scope="col">Completed</th>
       <th scope="col">User</th>
     </tr>
-  </thead>
-  <tbody>
+    </thead>
+    <tbody>
     <tr *ngFor="let task of taskHistories">
       <th scope="row">{{ task.taskId }}</th>
       <td>
@@ -22,16 +23,21 @@
       <td><ngb-highlight [result]="task.completed | date: 'MM/dd/yyyy'"></ngb-highlight></td>
       <td><ngb-highlight [result]="task.user.fullName + ' - ' + task.user.email"></ngb-highlight></td>
     </tr>
-  </tbody>
-</table>
+    </tbody>
+  </table>
 
-<!--<div class="d-flex justify-content-between p-2">-->
-<!--  <ngb-pagination [collectionSize]="page.pageCount!" [(page)]="page.currentPage" [pageSize]="page.pageSize">-->
-<!--  </ngb-pagination>-->
+  <!--<div class="d-flex justify-content-between p-2">-->
+  <!--  <ngb-pagination [collectionSize]="page.pageCount!" [(page)]="page.currentPage" [pageSize]="page.pageSize">-->
+  <!--  </ngb-pagination>-->
 
-<!--  <select class="custom-select" style="width: auto" name="pageSize" [(ngModel)]="page.pageSize">-->
-<!--    <option [ngValue]="2">2 items per page</option>-->
-<!--    <option [ngValue]="4">4 items per page</option>-->
-<!--    <option [ngValue]="6">6 items per page</option>-->
-<!--  </select>-->
-<!--</div>-->
+  <!--  <select class="custom-select" style="width: auto" name="pageSize" [(ngModel)]="page.pageSize">-->
+  <!--    <option [ngValue]="2">2 items per page</option>-->
+  <!--    <option [ngValue]="4">4 items per page</option>-->
+  <!--    <option [ngValue]="6">6 items per page</option>-->
+  <!--  </select>-->
+  <!--</div>-->
+</div>
+<ng-template #loadingContainer>
+  <app-loading></app-loading>
+</ng-template>
+

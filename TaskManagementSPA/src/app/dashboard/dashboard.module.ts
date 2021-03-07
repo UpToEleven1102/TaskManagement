@@ -9,10 +9,11 @@ import { DashboardComponent } from './dashboard.component';
 import { CoreModule } from '../core/core.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
+import {SharedModule} from '../shared/shared.module';
 
 @NgModule({
   declarations: [HomeComponent, UsersComponent, TasksComponent, TaskHistoriesComponent, DashboardComponent],
   exports: [DashboardComponent],
-  imports: [CommonModule, DashboardRoutingModule, CoreModule, NgbModule, FormsModule],
+  imports: [CommonModule, DashboardRoutingModule, CoreModule, NgbModule, FormsModule, SharedModule],
 })
 export class DashboardModule {}
