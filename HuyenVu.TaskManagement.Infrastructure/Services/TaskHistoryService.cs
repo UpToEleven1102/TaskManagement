@@ -22,7 +22,7 @@ namespace HuyenVu.TaskManagement.Infrastructure.Services
             _responseMapper = MapperFactory.GetMapper(new MapperConfiguration(cfg =>
             {
                 cfg.CreateMap<TaskHistory, TaskHistoryResponseModel>();
-                cfg.CreateMap<User, UserResponseModel>();
+                cfg.CreateMap<User, UserResponseModel>().MaxDepth(1);
             }));
         }
 

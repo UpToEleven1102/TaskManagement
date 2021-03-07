@@ -1,3 +1,5 @@
+import {Task} from 'protractor/built/taskScheduler';
+
 export type TaskHistory = {
   taskId: number;
   userId: number;
@@ -14,6 +16,8 @@ export type User = {
   email: string;
   fullName: string;
   mobileNo: string;
+  tasks: Task[];
+  taskHistories: TaskHistory[];
 };
 
 export type PaginationType<T> = {
@@ -21,4 +25,13 @@ export type PaginationType<T> = {
   pageSize: number;
   currentPage: number;
   data: Array<T>
+};
+
+export type Dashboard = {
+  userCount: number;
+  taskCount: number;
+  taskHistoryCount: number;
+  topTaskUsers: User[];
+  topCompletedUsers: User[];
+  recentTaskHistories: TaskHistory[];
 };

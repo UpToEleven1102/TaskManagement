@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParamsOptions } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { Observable, ObservableInput, throwError } from 'rxjs';
-import { TaskHistory, User } from '../../shared/types';
+import { Dashboard, TaskHistory, User } from '../../shared/types';
 import { catchError, map } from 'rxjs/operators';
 import { ToastService } from './toast.service';
 
@@ -38,6 +38,11 @@ export class ApiService {
   getUsers(): Observable<User[]> {
     return this.getData('user').pipe(map((res) => res as User[]));
   }
+
+  getDashboard(): Observable<Dashboard> {
+    return this.getData('dashboard').pipe(map((res) => res as Dashboard));
+  }
+
   private handleError = (error: HttpErrorResponse): ObservableInput<any> => {
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.

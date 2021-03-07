@@ -59,7 +59,7 @@ namespace HuyenVu.TaskManagement.Infrastructure.Repositories
 
         public async Task<IEnumerable<TaskHistory>> GetRecent()
         {
-            return await _dbContext.TaskHistories.OrderByDescending(t => t.Completed).ToListAsync();
+            return await _dbContext.TaskHistories.OrderByDescending(t => t.Completed).Take(10).ToListAsync();
         }
     }
 }

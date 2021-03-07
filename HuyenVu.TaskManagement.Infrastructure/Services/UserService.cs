@@ -6,6 +6,7 @@ using HuyenVu.TaskManagement.Core.Models;
 using HuyenVu.TaskManagement.Core.RepositoryInterface;
 using HuyenVu.TaskManagement.Core.ServiceInterface;
 using HuyenVu.TaskManagement.Infrastructure.Helpers;
+using Task = HuyenVu.TaskManagement.Core.Entities.Task;
 
 namespace HuyenVu.TaskManagement.Infrastructure.Services
 {
@@ -19,8 +20,20 @@ namespace HuyenVu.TaskManagement.Infrastructure.Services
         public UserService(IUserRepository userRepository)
         {
             _userRepository = userRepository;
-            _responseMapper = MapperFactory.GetMapper<User, UserResponseModel>();
             _requestMapper = MapperFactory.GetMapper<UserRequestModel, User>();
+            // kinda hairy, need better mapper
+            _responseMapper = MapperFactory.GetMapper(new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<User, UserResponseModel>();
+                cfg.CreateMap<Task, TaskResponseModel>().ForMember(
+                    t => t.User,
+                    opt => opt.Ignore()
+                );
+                cfg.CreateMap<TaskHistory, TaskHistoryResponseModel>().ForMember(
+                    t => t.User,
+                    opt => opt.Ignore()
+                );
+            }));
         }
 
         public Task<User> AddUser(UserRequestModel userRequestModel)

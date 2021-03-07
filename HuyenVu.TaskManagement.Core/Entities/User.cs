@@ -14,8 +14,8 @@ namespace HuyenVu.TaskManagement.Core.Entities
 
         public string MobileNo { get; set; }
         
-        public IEnumerable<Task> Tasks { get; set; }
+        public virtual IEnumerable<Task> Tasks { get; set; }
         
-        public IEnumerable<TaskHistory> TaskHistories { get; set; }
+        public virtual IEnumerable<TaskHistory> TaskHistories { get; set; }
     }
 }

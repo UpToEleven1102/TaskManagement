@@ -18,6 +18,6 @@ namespace HuyenVu.TaskManagement.Core.Entities
         
         public string Remarks { get; set; }
         
-        public User User { get; set; }
+        public virtual User User { get; set; }
     }
 }

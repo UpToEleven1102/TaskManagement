@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
+using HuyenVu.TaskManagement.Core.Entities;
 using HuyenVu.TaskManagement.Core.Models;
 using HuyenVu.TaskManagement.Core.RepositoryInterface;
 using HuyenVu.TaskManagement.Core.ServiceInterface;
@@ -9,17 +10,21 @@ using Task = HuyenVu.TaskManagement.Core.Entities.Task;
 
 namespace HuyenVu.TaskManagement.Infrastructure.Services
 {
-    public class TaskService: ITaskService
+    public class TaskService : ITaskService
     {
-        private readonly ITaskRepository _taskRepository;
         private readonly IMapper _requestMapper;
         private readonly IMapper _responseMapper;
+        private readonly ITaskRepository _taskRepository;
 
         public TaskService(ITaskRepository taskRepository)
         {
             _taskRepository = taskRepository;
             _requestMapper = MapperFactory.GetMapper<TaskRequestModel, Task>();
-            _responseMapper = MapperFactory.GetMapper<Task, TaskResponseModel>();
+            _responseMapper = MapperFactory.GetMapper(new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Task, TaskResponseModel>();
+                cfg.CreateMap<User, UserResponseModel>().MaxDepth(1);
+            }));
         }
 
         public System.Threading.Tasks.Task<Task> AddTask(TaskRequestModel taskRequest)
@@ -31,7 +36,7 @@ namespace HuyenVu.TaskManagement.Infrastructure.Services
         public System.Threading.Tasks.Task<Task> UpdateTask(TaskRequestModel taskRequest)
         {
             var task = _requestMapper.Map<Task>(taskRequest);
-            return _taskRepository.Update(task); 
+            return _taskRepository.Update(task);
         }
 
         public async Task<IEnumerable<TaskResponseModel>> GetTasks()

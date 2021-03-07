@@ -43,8 +43,9 @@ namespace HuyenVu.TaskManagement.Infrastructure.Repositories
         public async Task<IEnumerable<User>> GetAll(Expression<Func<User, bool>> filter = null)
         {
             return filter == null
-                ? await _dbContext.Users.ToListAsync()
-                : await _dbContext.Users.Where(filter).ToListAsync();
+                ? await _dbContext.Users.Include(u => u.TaskHistories).Include(u => u.Tasks).ToListAsync()
+                : await _dbContext.Users.Where(filter).Include(u => u.TaskHistories).Include(u => u.Tasks)
+                    .ToListAsync();
         }
 
         public async Task<User> GetById(int id)
@@ -59,12 +60,14 @@ namespace HuyenVu.TaskManagement.Infrastructure.Repositories
 
         public async Task<IEnumerable<User>> GetMostCompletedUser()
         {
-            return await _dbContext.Users.OrderByDescending(u => u.Tasks.Count()).ToListAsync();
+            return await _dbContext.Users.OrderByDescending(u => u.TaskHistories.Count()).Include(u => u.TaskHistories)
+                .Take(10).ToListAsync();
         }
 
         public async Task<IEnumerable<User>> GetMostTaskUser()
         {
-            return await _dbContext.Users.OrderByDescending(u => u.TaskHistories.Count()).ToListAsync();
+            return await _dbContext.Users.OrderByDescending(u => u.Tasks.Count()).Include(u => u.Tasks)
+                .Take(10).ToListAsync();
         }
     }
 }

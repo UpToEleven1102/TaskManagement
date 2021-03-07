@@ -28,7 +28,8 @@ namespace HuyenVu.TaskManagement.API
             services.AddControllers().AddNewtonsoftJson();
 
             services.AddDbContext<TaskManagementDbContext>(opts =>
-                opts.UseSqlServer(Configuration.GetConnectionString("TaskManagementDbConnectionString")));
+                opts.UseLazyLoadingProxies()
+                    .UseSqlServer(Configuration.GetConnectionString("TaskManagementDbConnectionString")));
 
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IUserService, UserService>();
