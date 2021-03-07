@@ -7,6 +7,7 @@
       <th scope="col">Remarks</th>
       <th scope="col">Due Date</th>
       <th scope="col">Completed</th>
+      <th scope="col">User</th>
     </tr>
   </thead>
   <tbody>
@@ -19,6 +20,7 @@
       <td><ngb-highlight [result]="task.remarks"></ngb-highlight></td>
       <td><ngb-highlight [result]="task.dueDate | date: 'MM/dd/yyyy'"></ngb-highlight></td>
       <td><ngb-highlight [result]="task.completed | date: 'MM/dd/yyyy'"></ngb-highlight></td>
+      <td><ngb-highlight [result]="task.user.fullName + ' - ' + task.user.email"></ngb-highlight></td>
     </tr>
   </tbody>
 </table>

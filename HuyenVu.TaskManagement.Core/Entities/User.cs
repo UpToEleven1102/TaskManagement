@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace HuyenVu.TaskManagement.Core.Entities
 {
     public class User
@@ -11,5 +13,9 @@ namespace HuyenVu.TaskManagement.Core.Entities
         public string FullName { get; set; }
 
         public string MobileNo { get; set; }
+        
+        public IEnumerable<Task> Tasks { get; set; }
+        
+        public IEnumerable<TaskHistory> TaskHistories { get; set; }
     }
 }

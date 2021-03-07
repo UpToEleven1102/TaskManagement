@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace HuyenVu.TaskManagement.Core.RepositoryInterface
@@ -11,8 +13,10 @@ namespace HuyenVu.TaskManagement.Core.RepositoryInterface
 
         public Task<bool> Delete(T obj);
 
-        public Task<IEnumerable<T>> GetAll();
+        public Task<IEnumerable<T>> GetAll(Expression<Func<T, bool>> filter = null);
 
         public Task<T> GetById(int id);
+
+        public Task<int> Count();
     }
 }

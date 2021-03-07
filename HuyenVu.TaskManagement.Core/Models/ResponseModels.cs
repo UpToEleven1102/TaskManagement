@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace HuyenVu.TaskManagement.Core.Models
 {
@@ -46,6 +47,19 @@ namespace HuyenVu.TaskManagement.Core.Models
         
         public string Remarks { get; set; }
         
-        // public UserResponseModel User { get; set; }
+        public UserResponseModel User { get; set; }
+    }
+
+    public class DashboardResponseModel
+    {
+        public int UserCount { get; set; }
+
+        public int TaskCount { get; set; }
+
+        public int TaskHistoryCount { get; set; }
+        
+        public IEnumerable<UserResponseModel> Users { get; set; }
+
+        public IEnumerable<TaskHistoryResponseModel> RecentTaskHistories { get; set; }
     }
 }

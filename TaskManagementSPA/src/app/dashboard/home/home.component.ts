@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastService } from '../../core/services/toast.service';
+import { ApiService } from '../../core/services/api.service';
+import { User } from '../../shared/types';
 
 @Component({
   selector: 'app-home',
@@ -7,11 +9,13 @@ import { ToastService } from '../../core/services/toast.service';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
-  constructor(protected toastService: ToastService) {}
+  users!: User[];
+  constructor(protected api: ApiService) {}
 
-  ngOnInit(): void {}
-
-  openToast(): void {
-    this.toastService.show('Test Toast', 'Hello World');
+  ngOnInit(): void {
+    this.api.getUsers().subscribe((res) => {
+      console.log(res);
+      this.users = res;
+    });
   }
 }

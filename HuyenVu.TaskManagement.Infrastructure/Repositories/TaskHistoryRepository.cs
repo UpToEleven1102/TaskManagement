@@ -1,4 +1,7 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using HuyenVu.TaskManagement.Core.Entities;
 using HuyenVu.TaskManagement.Core.RepositoryInterface;
@@ -7,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HuyenVu.TaskManagement.Infrastructure.Repositories
 {
-    public class TaskHistoryRepository: ITaskHistoryRepository
+    public class TaskHistoryRepository : ITaskHistoryRepository
     {
         private readonly TaskManagementDbContext _dbContext;
 
@@ -37,14 +40,26 @@ namespace HuyenVu.TaskManagement.Infrastructure.Repositories
             return res > 0;
         }
 
-        public async Task<IEnumerable<TaskHistory>> GetAll()
+        public async Task<IEnumerable<TaskHistory>> GetAll(Expression<Func<TaskHistory, bool>> filter = null)
         {
-            return await _dbContext.TaskHistories.ToListAsync();
+            return filter == null
+                ? await _dbContext.TaskHistories.Include(th => th.User).ToListAsync()
+                : await _dbContext.TaskHistories.Where(filter).Include(th => th.User).ToListAsync();
         }
 
         public async Task<TaskHistory> GetById(int id)
         {
             return await _dbContext.TaskHistories.FindAsync(id);
+        }
+
+        public Task<int> Count()
+        {
+            return _dbContext.TaskHistories.CountAsync();
+        }
+
+        public async Task<IEnumerable<TaskHistory>> GetRecent()
+        {
+            return await _dbContext.TaskHistories.OrderByDescending(t => t.Completed).ToListAsync();
         }
     }
 }

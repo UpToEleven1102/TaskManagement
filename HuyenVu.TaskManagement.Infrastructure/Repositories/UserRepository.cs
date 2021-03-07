@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using HuyenVu.TaskManagement.Core.Entities;
 using HuyenVu.TaskManagement.Core.RepositoryInterface;
@@ -38,14 +40,31 @@ namespace HuyenVu.TaskManagement.Infrastructure.Repositories
             return res > 0;
         }
 
-        public async Task<IEnumerable<User>> GetAll()
+        public async Task<IEnumerable<User>> GetAll(Expression<Func<User, bool>> filter = null)
         {
-            return await _dbContext.Users.ToListAsync();
+            return filter == null
+                ? await _dbContext.Users.ToListAsync()
+                : await _dbContext.Users.Where(filter).ToListAsync();
         }
 
         public async Task<User> GetById(int id)
         {
             return await _dbContext.Users.FindAsync(id);
+        }
+
+        public Task<int> Count()
+        {
+            return _dbContext.Users.CountAsync();
+        }
+
+        public async Task<IEnumerable<User>> GetMostCompletedUser()
+        {
+            return await _dbContext.Users.OrderByDescending(u => u.Tasks.Count()).ToListAsync();
+        }
+
+        public async Task<IEnumerable<User>> GetMostTaskUser()
+        {
+            return await _dbContext.Users.OrderByDescending(u => u.TaskHistories.Count()).ToListAsync();
         }
     }
 }

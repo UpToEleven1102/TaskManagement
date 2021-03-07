@@ -9,17 +9,21 @@ using HuyenVu.TaskManagement.Infrastructure.Helpers;
 
 namespace HuyenVu.TaskManagement.Infrastructure.Services
 {
-    public class TaskHistoryService:ITaskHistoryService
+    public class TaskHistoryService : ITaskHistoryService
     {
-        private readonly ITaskHistoryRepository _taskHistoryRepository;
         private readonly IMapper _requestMapper;
         private readonly IMapper _responseMapper;
+        private readonly ITaskHistoryRepository _taskHistoryRepository;
 
         public TaskHistoryService(ITaskHistoryRepository taskHistoryRepository)
         {
             _taskHistoryRepository = taskHistoryRepository;
             _requestMapper = MapperFactory.GetMapper<TaskHistoryRequestModel, TaskHistory>();
-            _responseMapper = MapperFactory.GetMapper<TaskHistory, TaskHistoryResponseModel>();
+            _responseMapper = MapperFactory.GetMapper(new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<TaskHistory, TaskHistoryResponseModel>();
+                cfg.CreateMap<User, UserResponseModel>();
+            }));
         }
 
         public async Task<TaskHistory> AddTask(TaskHistoryRequestModel taskRequestModel)
