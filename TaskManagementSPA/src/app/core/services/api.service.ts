@@ -89,6 +89,18 @@ export class ApiService {
     return this.postData(`task/${id}/complete`).pipe(map((res) => res));
   }
 
+  deleteUser(id: number): Observable<any> {
+    return this.deleteData('user/' + id);
+  }
+
+  deleteTask(id: number): Observable<any> {
+    return this.deleteData('task/' + id);
+  }
+
+  deleteTaskHistory(id: number): Observable<any> {
+    return this.deleteData('task-history/' + id);
+  }
+
   private handleError = (error: HttpErrorResponse): ObservableInput<any> => {
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.

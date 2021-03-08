@@ -5,6 +5,7 @@ import { takeUntil } from 'rxjs/operators';
 import { User } from '../../shared/types';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NewUserModalComponent } from '../user-detail/new-user-modal/new-user-modal.component';
+import { ToastService } from '../../core/services/toast.service';
 
 @Component({
   selector: 'app-users',
@@ -16,7 +17,7 @@ export class UsersComponent implements OnInit, OnDestroy {
   showUserId?: number;
   users?: User[];
 
-  constructor(protected api: ApiService, private modalService: NgbModal) {}
+  constructor(protected api: ApiService, private modalService: NgbModal, private toast: ToastService) {}
 
   ngOnInit(): void {
     this.fetchData();
@@ -39,6 +40,27 @@ export class UsersComponent implements OnInit, OnDestroy {
 
   viewTaskHistories(user: User): void {
     this.showUserId = this.showUserId === user.id ? undefined : user.id;
+  }
+
+  removeUser(id: number): void {
+    const sub = this.api.deleteUser(id).subscribe(
+      (res) => {
+        this.fetchData();
+        sub.unsubscribe();
+      },
+      (error) => {
+        this.toast.show('Error!', 'Something went wrong!');
+        this.toast.show('Error!', 'You might wanna delete all tasks and task histories related to the user first!');
+      }
+    );
+  }
+
+  deleteSuccess(success: boolean): void {
+    if (success) {
+      this.fetchData();
+    } else {
+      this.toast.show('Error!', 'Something went wrong!');
+    }
   }
 
   private fetchData(): void {

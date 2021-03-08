@@ -9,6 +9,7 @@
       <th scope="col">Due Date</th>
       <th scope="col">Completed</th>
       <th scope="col" *ngIf="taskHistories[0]?.user">User</th>
+      <th></th>
     </tr>
     </thead>
     <tbody>
@@ -23,6 +24,11 @@
       <td><ngb-highlight [result]="task.completed | date: 'MM/dd/yyyy'"></ngb-highlight></td>
       <td *ngIf="task?.user">
         <ngb-highlight [result]="task.user?.fullName + ' - ' + task.user?.email"></ngb-highlight>
+      </td>
+      <td>
+        <button class="btn btn-outline-dark" (click)="deleteTaskHistory(task.taskId)">
+          <i class="bi bi-trash"></i>
+        </button>
       </td>
     </tr>
     </tbody>

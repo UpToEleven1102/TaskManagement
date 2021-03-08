@@ -7,7 +7,7 @@
 </div>
 <div class="row" *ngIf="taskHistories; else loadingContainer">
   <div class="col">
-    <app-task-histories-list [taskHistories]="taskHistories"></app-task-histories-list>
+    <app-task-histories-list [taskHistories]="taskHistories" (onDeleteSuccess)="deleteSuccess($event)"></app-task-histories-list>
     <!--<div class="d-flex justify-content-between p-2">-->
     <!--  <ngb-pagination [collectionSize]="page.pageCount!" [(page)]="page.currentPage" [pageSize]="page.pageSize">-->
     <!--  </ngb-pagination>-->

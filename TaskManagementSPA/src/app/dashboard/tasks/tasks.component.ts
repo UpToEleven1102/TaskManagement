@@ -67,6 +67,15 @@ export class TasksComponent implements OnInit, OnDestroy {
     }
   }
 
+  deleteSuccess(success: boolean): void {
+    if (success) {
+      this.fetchData();
+      this.toast.show('Success!', 'Deleted the task!');
+    } else {
+      this.toast.show('Error!', 'Something went wrong!');
+    }
+  }
+
   editSuccess(success: boolean): void {
     if (success) {
       this.fetchData();

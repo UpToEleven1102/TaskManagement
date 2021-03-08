@@ -18,6 +18,7 @@ export class TasksListComponent implements OnDestroy {
   @Input() users!: User[];
   @Output() onEditSuccess: EventEmitter<boolean> = new EventEmitter<boolean>();
   @Output() onArchiveSuccess: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() onDeleteSuccess: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   subscription = new Subject();
 
@@ -39,6 +40,18 @@ export class TasksListComponent implements OnDestroy {
     });
     modalRef.componentInstance.task = { ...task };
     modalRef.componentInstance.users = this.users;
+  }
+
+  deleteTask(id?: number): void {
+    if (id) {
+      const sub = this.api.deleteTask(id).subscribe(
+        (res) => {
+          sub.unsubscribe();
+          this.onDeleteSuccess.emit(true);
+        },
+        (error) => this.onDeleteSuccess.emit(false)
+      );
+    }
   }
 
   completeTask(id: number): void {

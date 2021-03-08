@@ -36,11 +36,18 @@
           <td>
             <a class="btn page-link" (click)="viewTaskHistories(user)">{{ user.taskHistories?.length || 0 }}</a>
           </td>
-          <td><button class="btn btn-outline-dark w-100" [routerLink]="['/app/users', user.id]">Edit</button></td>
+          <td>
+            <div class="btn-group">
+              <button class="btn btn-outline-dark w-100" [routerLink]="['/app/users', user.id]">Edit</button>
+              <button class="btn btn-outline-dark w-100" (click)="removeUser(user.id)">
+                <i class="bi bi-trash"></i>
+              </button>
+            </div>
+          </td>
         </tr>
         <tr *ngIf="showUserId === user.id">
           <td colspan="6">
-            <app-task-histories-list [taskHistories]="user.taskHistories || []"></app-task-histories-list>
+            <app-task-histories-list [taskHistories]="user.taskHistories || []" (onDeleteSuccess)="deleteSuccess($event)"></app-task-histories-list>
           </td>
         </tr>
       </ng-container>

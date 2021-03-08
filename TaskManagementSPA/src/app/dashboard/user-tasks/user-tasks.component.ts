@@ -58,4 +58,12 @@ export class UserTasksComponent implements OnInit, OnDestroy {
       this.fetchData();
     }
   }
+
+  deleteSuccess(success: boolean): void {
+    if(success) {
+      this.fetchData();
+    } else {
+      this.toast.show('Error!', 'Something went wrong!');
+    }
+  }
 }
