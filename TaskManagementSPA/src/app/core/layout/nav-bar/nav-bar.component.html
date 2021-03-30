@@ -1,4 +1,4 @@
-<nav class="navbar navbar-light bg-light {{(innerTop > 5 || isMobile) && 'mini'}}">
+<nav class="navbar navbar-light bg-light {{ (innerTop > 5 || isMobile) && 'mini' }}">
   <div class="container-fluid">
     <div class="btn-group">
       <button class="nav-link btn btn-light" (click)="menuService.toggleMenu()"><i class="bi bi-list"></i></button>
@@ -8,11 +8,9 @@
       </a>
     </div>
     <div class="btn-group">
-      <a class="btn btn-outline-dark btn-account">
+      <a class="btn btn-outline-dark btn-account" [routerLink]="['/my-account']">
         <i class="bi bi-person"></i>
-        <span>
-          My Account
-        </span>
+        <span> My Account </span>
       </a>
     </div>
   </div>

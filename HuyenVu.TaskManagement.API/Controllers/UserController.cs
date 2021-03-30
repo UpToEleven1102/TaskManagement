@@ -1,7 +1,9 @@
 using System;
+using System.Net.Mime;
 using System.Threading.Tasks;
 using HuyenVu.TaskManagement.Core.Models;
 using HuyenVu.TaskManagement.Core.ServiceInterface;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HuyenVu.TaskManagement.API.Controllers
@@ -52,6 +54,14 @@ namespace HuyenVu.TaskManagement.API.Controllers
                 Console.WriteLine(e);
                 return StatusCode(500, e.Message);
             }
+        }
+
+        [HttpPost]
+        [Route("profile-image")]
+        public IActionResult UpdateProfileImage()
+        {
+            // read the file here
+            return Ok(Request.ContentType);
         }
 
         [HttpPut]

@@ -13,7 +13,6 @@ export class DashboardComponent implements OnInit {
   }
 
   sizeChange(width: number): void {
-    console.log(width)
     if (width < 790) {
       this.isMobile = true;
     }

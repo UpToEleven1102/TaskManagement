@@ -14,6 +14,7 @@ import { UserDetailComponent } from './user-detail/user-detail.component';
 import { NewUserModalComponent } from './user-detail/new-user-modal/new-user-modal.component';
 import { NewTaskModalComponent } from './tasks/new-task-modal/new-task-modal.component';
 import { UserTasksComponent } from './user-tasks/user-tasks.component';
+import { MyAccountComponent } from './my-account/my-account.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { UserTasksComponent } from './user-tasks/user-tasks.component';
     NewUserModalComponent,
     NewTaskModalComponent,
     UserTasksComponent,
+    MyAccountComponent,
   ],
   exports: [DashboardComponent],
   imports: [CommonModule, DashboardRoutingModule, CoreModule, NgbModule, FormsModule, SharedModule],

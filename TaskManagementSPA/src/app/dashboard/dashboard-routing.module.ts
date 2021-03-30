@@ -6,6 +6,7 @@ import { TasksComponent } from './tasks/tasks.component';
 import { TaskHistoriesComponent } from './task-histories/task-histories.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
 import { UserTasksComponent } from './user-tasks/user-tasks.component';
+import { MyAccountComponent } from './my-account/my-account.component';
 
 const routes: Routes = [
   { path: 'app', component: HomeComponent },
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'app/users/:id/tasks', component: UserTasksComponent },
   { path: 'app/tasks', component: TasksComponent },
   { path: 'app/task-histories', component: TaskHistoriesComponent },
+  { path: 'my-account', component: MyAccountComponent },
 ];
 
 @NgModule({

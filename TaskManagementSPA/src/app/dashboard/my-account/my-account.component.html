@@ -1,0 +1,38 @@
+<div class="container-fluid m-3">
+  <div class="row" *ngIf="user; else loadingContainer">
+    <div class="col">
+      <div class="card" style="width: 18rem">
+        <a class="btn-edit" (click)="editing = !editing">
+          <i class="bi bi-pencil" *ngIf="!editing"></i>
+          <i class="bi bi-x-octagon" *ngIf="editing"></i>
+        </a>
+        <app-file-uploader [imgUrl]="user.profileUrl" [uploadEnabled]="editing"></app-file-uploader>
+        <div class="card-body">
+          <div *ngIf="!editing; else userForm">
+            <h5 class="card-title">Name: {{ user.fullName }}</h5>
+            <p class="card-text">Email: {{ user.email }}</p>
+            <p class="card-text">Phone: {{ user.mobileNo }}</p>
+          </div>
+          <ng-template #userForm>
+            <form>
+              <label for="fullName" class="form-label">Full Name</label>
+              <input class="form-control" name="fullName" id="fullName" [(ngModel)]="user.fullName" />
+
+              <label for="email" class="form-label">Full Name</label>
+              <input class="form-control" name="email" type="email" id="email" [(ngModel)]="user.email" />
+
+              <label for="mobileNo" class="form-label">Mobile No</label>
+              <input class="form-control" name="mobileNo" type="email" id="mobileNo" [(ngModel)]="user.mobileNo" />
+            </form>
+          </ng-template>
+          <a class="btn btn-primary" *ngIf="editing" (click)="editing ? onSubmit() : onEdit()">{{
+            editing ? 'Submit' : 'Edit'
+          }}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ng-template #loadingContainer>
+    <app-loading></app-loading>
+  </ng-template>
+</div>

@@ -1,0 +1,13 @@
+a.btn-edit {
+  color: white;
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  border: solid 1px;
+  width: 40px;
+  height: 30px;
+  text-align: center;
+  border-radius: 20px;
+  background-color: rgba(200, 200, 200, .5);
+  cursor: pointer;
+}

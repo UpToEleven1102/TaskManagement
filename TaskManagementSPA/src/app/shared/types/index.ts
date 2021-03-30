@@ -24,6 +24,7 @@ export type Task = {
 export type User = {
   id: number;
   email: string;
+  profileUrl?: string;
   fullName: string;
   mobileNo: string;
   tasks?: Task[];

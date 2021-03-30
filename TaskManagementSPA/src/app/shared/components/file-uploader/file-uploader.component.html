@@ -1,0 +1,11 @@
+<img [src]="imgUrl" class="card-img-top" alt="..." #imageTag />
+<input
+  #uploadInput
+  name="profileImage"
+  type="file"
+  style="display: none"
+  accept="image/jpeg"
+  id="profileImage"
+  (change)="handleProfileChange($event)"
+/>
+<a class="btn btn-light" *ngIf="uploadEnabled" (click)="uploadInput.click()"><i class="bi bi-upload"></i></a>

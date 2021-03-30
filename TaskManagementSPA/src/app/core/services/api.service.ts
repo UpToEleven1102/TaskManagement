@@ -101,6 +101,13 @@ export class ApiService {
     return this.deleteData('task-history/' + id);
   }
 
+  uploadProfilePicture(file: File): Observable<any> {
+   const formData: FormData = new FormData();
+   formData.append('fileKey', file, file.name);
+
+   return this.postData('user/profile-image', formData);
+  }
+
   private handleError = (error: HttpErrorResponse): ObservableInput<any> => {
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.
