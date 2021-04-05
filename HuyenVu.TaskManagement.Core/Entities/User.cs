@@ -17,5 +17,7 @@ namespace HuyenVu.TaskManagement.Core.Entities
         public virtual IEnumerable<Task> Tasks { get; set; }
         
         public virtual IEnumerable<TaskHistory> TaskHistories { get; set; }
+        
+        public virtual IEnumerable<Role> Roles { get; set; }
     }
 }

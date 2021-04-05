@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using HuyenVu.TaskManagement.Core.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -11,10 +12,12 @@ namespace HuyenVu.TaskManagement.Infrastructure.Data
         }
 
         public DbSet<User> Users { get; set; }
-        
+
         public DbSet<Task> Tasks { get; set; }
-        
+
         public DbSet<TaskHistory> TaskHistories { get; set; }
+
+        public DbSet<Role> Roles { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -23,6 +26,21 @@ namespace HuyenVu.TaskManagement.Infrastructure.Data
             modelBuilder.Entity<Task>(ConfigureTaskTable);
             modelBuilder.Entity<TaskHistory>(ConfigureTaskHistory);
 
+            modelBuilder.Entity<Role>(ConfigureRoleTable);
+            
+            modelBuilder.Entity<User>()
+                .HasMany(u => u.Roles)
+                .WithMany(r => r.Users)
+                .UsingEntity<Dictionary<string, object>>("UsersRoles",
+                    u => u.HasOne<Role>().WithMany().HasForeignKey("RoleId"),
+                    r => r.HasOne<User>().WithMany().HasForeignKey("UserId")
+                );
+        }
+
+        private void ConfigureRoleTable(EntityTypeBuilder<Role> builder)
+        {
+            builder.HasKey(r => r.Id);
+            builder.Property(r => r.Name).HasMaxLength(50);
         }
 
         private void ConfigureUserTable(EntityTypeBuilder<User> builder)
