@@ -16,6 +16,7 @@ namespace HuyenVu.TaskManagement.API.Middlewares
 
         public async Task Invoke(HttpContext httpContext)
         {
+            Console.WriteLine("Got here, bb");
             Console.WriteLine(httpContext.Request.Headers["password123"]);
             // if (httpContext.Request.Headers["password123"] == "password123456789")
                 await _next(httpContext);
@@ -24,8 +25,10 @@ namespace HuyenVu.TaskManagement.API.Middlewares
         }
     }
 
-    // public static class MiddleWareExtensions
-    // {
-    //     public static IApplicationBuilder
-    // }
+    public static class MiddleWareExtensions
+    {
+        public static IApplicationBuilder UsePasswordHeaderCheckingMiddleware(this IApplicationBuilder builder) {
+            return builder.UseMiddleware<PasswordHeaderCheckingMiddleware>();
+        }
+    }
 }

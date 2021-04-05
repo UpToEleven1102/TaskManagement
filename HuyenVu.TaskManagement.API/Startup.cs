@@ -66,7 +66,9 @@ namespace HuyenVu.TaskManagement.API
 
             app.UseHttpsRedirection();
 
-            app.UseMiddleware<PasswordHeaderCheckingMiddleware>();
+            // app.UseMiddleware<PasswordHeaderCheckingMiddleware>();
+
+            app.UsePasswordHeaderCheckingMiddleware();
 
             app.UseRouting();
 
