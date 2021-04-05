@@ -1,3 +1,4 @@
+using HuyenVu.TaskManagement.API.Middlewares;
 using HuyenVu.TaskManagement.Core.RepositoryInterface;
 using HuyenVu.TaskManagement.Core.ServiceInterface;
 using HuyenVu.TaskManagement.Infrastructure.Data;
@@ -64,6 +65,8 @@ namespace HuyenVu.TaskManagement.API
                 .AllowAnyMethod());
 
             app.UseHttpsRedirection();
+
+            app.UseMiddleware<PasswordHeaderCheckingMiddleware>();
 
             app.UseRouting();
 
