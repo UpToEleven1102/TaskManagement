@@ -27,6 +27,8 @@ namespace HuyenVu.TaskManagement.Core.Models
         public string FullName { get; set; }
 
         public string MobileNo { get; set; }
+        
+        public string Token { get; set; }
     }
 
     public class TaskResponseModel

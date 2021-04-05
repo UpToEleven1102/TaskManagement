@@ -43,6 +43,7 @@ namespace HuyenVu.TaskManagement.API
             services.AddTransient<ITaskRepository, TaskRepository>();
             services.AddTransient<ITaskService, TaskService>();
 
+            services.AddTransient<IJwtService, JwtService>();
             services.AddTransient<IDashboardService, DashboardService>();
 
             services.AddSwaggerGen(c =>

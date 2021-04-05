@@ -35,6 +35,22 @@ namespace HuyenVu.TaskManagement.API.Controllers
         }
 
         [HttpPost]
+        [Route("Login")]
+        public async Task<IActionResult> LoginUser(UserRequestModel user)
+        {
+            try
+            {
+                var token = await _userService.LoginUserAsync(user);
+                return Ok(token);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return StatusCode(500, e.Message);
+            }
+        }
+
+        [HttpPost]
         public async Task<IActionResult> CreateUser(UserRequestModel userModel)
         {
             try

@@ -48,7 +48,7 @@ namespace HuyenVu.TaskManagement.Infrastructure.Repositories
                     .ToListAsync();
         }
 
-        public async Task<User> GetById(int id)
+        public async Task<User> GetById(int? id)
         {
             return await _dbContext.Users.FindAsync(id);
         }
@@ -68,6 +68,11 @@ namespace HuyenVu.TaskManagement.Infrastructure.Repositories
         {
             return await _dbContext.Users.OrderByDescending(u => u.Tasks.Count()).Include(u => u.Tasks)
                 .Take(8).ToListAsync();
+        }
+
+        public Task<User> GetUserByEmail(string email)
+        {
+            return _dbContext.Users.Where(u => u.Email == email).SingleOrDefaultAsync();
         }
     }
 }

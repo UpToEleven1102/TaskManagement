@@ -9,6 +9,8 @@ namespace HuyenVu.TaskManagement.Core.ServiceInterface
     {
         public Task<User> AddUser(UserRequestModel user);
 
+        public Task<UserInfoResponseModel> LoginUserAsync(UserRequestModel user);
+
         public Task<User> UpdateUser(UserUpdateRequestModel user);
 
         public Task<IEnumerable<UserResponseModel>> GetAllUsers();

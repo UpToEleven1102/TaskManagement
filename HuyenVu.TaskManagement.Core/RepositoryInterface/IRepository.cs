@@ -15,7 +15,7 @@ namespace HuyenVu.TaskManagement.Core.RepositoryInterface
 
         public Task<IEnumerable<T>> GetAll(Expression<Func<T, bool>> filter = null);
 
-        public Task<T> GetById(int id);
+        public Task<T> GetById(int? id);
 
         public Task<int> Count();
     }

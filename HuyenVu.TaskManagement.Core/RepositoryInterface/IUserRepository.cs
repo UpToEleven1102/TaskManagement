@@ -8,5 +8,6 @@ namespace HuyenVu.TaskManagement.Core.RepositoryInterface
     {
         public Task<IEnumerable<User>> GetMostCompletedUser();
         public Task<IEnumerable<User>> GetMostTaskUser();
+        public Task<User> GetUserByEmail(string email);
     }
 }

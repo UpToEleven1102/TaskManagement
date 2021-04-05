@@ -14,17 +14,20 @@ namespace HuyenVu.TaskManagement.Infrastructure.Services
     {
         private readonly IMapper _requestMapper;
         private readonly IMapper _responseMapper;
+        private readonly IJwtService _jwtService;
 
         private readonly IUserRepository _userRepository;
 
-        public UserService(IUserRepository userRepository)
+        public UserService(IUserRepository userRepository, IJwtService jwtService)
         {
             _userRepository = userRepository;
+            _jwtService = jwtService;
             _requestMapper = MapperFactory.GetMapper<UserRequestModel, User>();
             // kinda hairy, need better mapper
             _responseMapper = MapperFactory.GetMapper(new MapperConfiguration(cfg =>
             {
                 cfg.CreateMap<User, UserResponseModel>();
+                cfg.CreateMap<User, UserInfoResponseModel>();
                 cfg.CreateMap<Task, TaskResponseModel>().ForMember(
                     t => t.User,
                     opt => opt.Ignore()
@@ -40,6 +43,16 @@ namespace HuyenVu.TaskManagement.Infrastructure.Services
         {
             var user = _requestMapper.Map<User>(userRequestModel);
             return _userRepository.Create(user);
+        }
+
+        public async Task<UserInfoResponseModel> LoginUserAsync(UserRequestModel user)
+        {
+            var userDb = await _userRepository.GetUserByEmail(user.Email);
+            if (userDb == null || userDb.Password != user.Password) return null;
+
+            var userRes =  _responseMapper.Map<UserInfoResponseModel>(userDb);
+            userRes.Token = _jwtService.GenerateJwtToken(userRes);
+            return userRes;
         }
 
         public async Task<User> UpdateUser(UserUpdateRequestModel userRequestModel)

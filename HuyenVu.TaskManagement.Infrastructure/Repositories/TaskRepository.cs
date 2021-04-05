@@ -47,7 +47,7 @@ namespace HuyenVu.TaskManagement.Infrastructure.Repositories
                 : await _dbContext.Tasks.Where(filter).Include(t => t.User).ToListAsync();
         }
 
-        public async Task<Task> GetById(int id)
+        public async Task<Task> GetById(int? id)
         {
             return await _dbContext.Tasks.FindAsync(id);
         }

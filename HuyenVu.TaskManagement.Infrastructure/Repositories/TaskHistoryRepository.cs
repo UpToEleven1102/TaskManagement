@@ -49,7 +49,7 @@ namespace HuyenVu.TaskManagement.Infrastructure.Repositories
                     .Include(th => th.User).ToListAsync();
         }
 
-        public async Task<TaskHistory> GetById(int id)
+        public async Task<TaskHistory> GetById(int? id)
         {
             return await _dbContext.TaskHistories.FindAsync(id);
         }
