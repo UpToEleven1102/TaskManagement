@@ -3,6 +3,7 @@ using System.Net.Mime;
 using System.Threading.Tasks;
 using HuyenVu.TaskManagement.Core.Models;
 using HuyenVu.TaskManagement.Core.ServiceInterface;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,6 +11,7 @@ namespace HuyenVu.TaskManagement.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize]
     public class UserController : ControllerBase
     {
         private readonly IUserService _userService;
@@ -36,6 +38,7 @@ namespace HuyenVu.TaskManagement.API.Controllers
 
         [HttpPost]
         [Route("Login")]
+        [AllowAnonymous]
         public async Task<IActionResult> LoginUser(UserRequestModel user)
         {
             try

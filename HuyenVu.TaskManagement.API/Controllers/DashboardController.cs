@@ -1,12 +1,14 @@
 using System;
 using System.Threading.Tasks;
 using HuyenVu.TaskManagement.Core.ServiceInterface;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HuyenVu.TaskManagement.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize]
     public class DashboardController :ControllerBase
     {
         private readonly IDashboardService _dashboardService;
