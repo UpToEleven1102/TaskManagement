@@ -6,11 +6,12 @@ import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { HttpClientModule } from '@angular/common/http';
+import { httpInterceptorProviders } from './interceptors';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [BrowserModule, AppRoutingModule, SharedModule, DashboardModule, HttpClientModule],
-  providers: [],
+  providers: [httpInterceptorProviders],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
